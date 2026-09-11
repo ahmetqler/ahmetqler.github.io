@@ -1,35 +1,32 @@
 # Portfolyo
 
-Ahmed Talha Güler'in kişisel portfolyo sitesi. Tek HTML dosyası, build adımı yok,
-bağımlılık yok. Tarayıcıda `index.html`'e çift tıklayınca da çalışır.
+Ahmed Talha Güler'in kişisel portfolyo sitesi.
+
+**Yayında: https://ahmetqler.github.io**
+
+Tek HTML dosyası, build adımı yok, bağımlılık yok. Tarayıcıda `index.html`'e
+çift tıklayınca da çalışır.
 
 ```
 index.html        tüm site — HTML, CSS, JS aynı dosyada
 gorseller/        proje ekran görüntüleri
 ```
 
-## GitHub Pages'te yayına alma
+## Siteyi güncelleme
 
-1. GitHub'da **ahmetqler.github.io** adında yeni ve **public** bir depo aç.
-   (Adın tam olarak bu olması önemli — o zaman adres `https://ahmetqler.github.io`
-   olur. Başka bir ad verirsen adres `https://ahmetqler.github.io/depo-adi`
-   şeklinde olur, o da çalışır.)
-
-2. Bu klasörün içindeyken:
+Yayın GitHub Pages üzerinden, `main` dalının kökünden yapılıyor. Yani **push
+ettiğin an site güncellenir** — ayrıca bir derleme ya da panel işi yok.
 
 ```bash
-git init
 git add .
-git commit -m "portfolyo"
-git branch -M main
-git remote add origin https://github.com/ahmetqler/ahmetqler.github.io.git
-git push -u origin main
+git commit -m "ne degistiyse onu yaz"
+git push
 ```
 
-3. Depo sayfasında **Settings → Pages** → *Source* kısmında **Deploy from a branch**,
-   branch olarak **main** ve klasör olarak **/ (root)** seç, kaydet.
+Değişiklik bir iki dakika içinde yayına yansır. Hemen görünmezse tarayıcının
+önbelleğini atlamak için sayfayı Ctrl+F5 ile yenile.
 
-4. Bir iki dakika sonra site yayında olur. Adresi aynı sayfada yazar.
+Yerelde denemek için `index.html`'e çift tıklaman yeterli; sunucu gerekmiyor.
 
 ## Dil
 
