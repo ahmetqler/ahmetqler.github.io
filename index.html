@@ -82,7 +82,8 @@ img{max-width:100%;display:block}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--isaret);outline-offset:3px;border-radius:2px}
 
-.kap{max-width:1000px;margin:0 auto;padding:0 22px}
+#gokyuzu{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.kap{max-width:1000px;margin:0 auto;padding:0 22px;position:relative;z-index:1}
 
 /* ---------- ortak ---------- */
 .etiket{
@@ -1155,6 +1156,7 @@ function temaYaz(t) {
   document.documentElement.setAttribute("data-theme", t);
   try { localStorage.setItem("tema", t); } catch (e) {}
   temaEtiketiYaz();
+  if (window.gokyuzuRenkYenile) window.gokyuzuRenkYenile();
 }
 temaDugme.addEventListener("click", function () {
   temaYaz(document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark");
@@ -1170,6 +1172,192 @@ temaDugme.addEventListener("click", function () {
   document.documentElement.setAttribute("data-theme", kayitliTema || sistemTema);
 
   dilYaz(kayitliDil || VARSAYILAN_DIL);
+})();
+/* =====================================================================
+   ARKA PLANDA UÇAN UÇAKLAR
+
+   Skyphrase'in (Flutter) FlightTrailsBackground'ından uyarlandı. Dart kodu
+   birebir taşınamaz — orada CustomPainter var — ama tekniğin kendisi aynı:
+   uçak PNG'lerinin yalnızca alfa kanalı kullanılıyor, gövde tema rengiyle
+   boyanıyor. Flutter'da BlendMode.srcIn, burada canvas'ın "source-in"
+   birleştirmesi. Görseller de Skyphrase'den geldi (ucaklar/).
+
+   Uçağın burnu her zaman gidiş yönünü gösterir: görseller sağa bakacak
+   şekilde hizalı, dönme açısı da doğrudan hareket vektöründen geliyor.
+   Rotalar düz ya da yay; kalp/gösteri formasyonları yok.
+
+   prefers-reduced-motion açıksa hiç çalışmaz.
+   ===================================================================== */
+(function () {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  var TURLER = [
+    { src: "ucaklar/concorde.png", oran: 85 / 202 },
+    { src: "ucaklar/a380.png",     oran: 168 / 187 },
+    { src: "ucaklar/cessna.png",   oran: 136 / 121, olcek: 0.62 }
+  ];
+
+  var REF = 128;   // boyanmış kopyanın referans genişliği (ölçeklenerek çizilir)
+
+  var tuval = document.createElement("canvas");
+  tuval.id = "gokyuzu";
+  tuval.setAttribute("aria-hidden", "true");
+  document.body.insertBefore(tuval, document.body.firstChild);
+  var cx = tuval.getContext("2d");
+
+  var g = 0, y = 0;
+  var gorseller = [], boyali = [], ucuslar = [];
+  var renkUcak = "", renkIz = "", renkVurgu = "";
+  var hazir = false;
+
+  function olcu() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    g = window.innerWidth;
+    y = window.innerHeight;
+    tuval.width = Math.round(g * dpr);
+    tuval.height = Math.round(y * dpr);
+    cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function jeton(ad) {
+    return getComputedStyle(document.documentElement).getPropertyValue(ad).trim();
+  }
+
+  function alfa(hex, a) {
+    var h = hex.replace("#", "");
+    if (h.length === 3) h = h[0] + h[0] + h[1] + h[1] + h[2] + h[2];
+    var n = parseInt(h, 16);
+    if (isNaN(n)) return "rgba(128,128,128," + a + ")";
+    return "rgba(" + ((n >> 16) & 255) + "," + ((n >> 8) & 255) + "," + (n & 255) + "," + a + ")";
+  }
+
+  /* Tema rengine boya — Flutter'daki ColorFilter.mode(..., BlendMode.srcIn) */
+  function boya() {
+    renkUcak  = alfa(jeton("--murekkep"), 0.30);
+    renkIz    = alfa(jeton("--murekkep"), 0.13);
+    renkVurgu = alfa(jeton("--isaret"),   0.20);
+
+    boyali = TURLER.map(function (t, i) {
+      var gg = REF, yy = Math.round(REF * t.oran);
+      var c = document.createElement("canvas");
+      c.width = gg; c.height = yy;
+      var k = c.getContext("2d");
+      k.drawImage(gorseller[i], 0, 0, gg, yy);
+      k.globalCompositeOperation = "source-in";
+      k.fillStyle = renkUcak;
+      k.fillRect(0, 0, gg, yy);
+      return c;
+    });
+  }
+  window.gokyuzuRenkYenile = function () { if (hazir) boya(); };
+
+  /* Ekran dışında, kenarlardan birinde bir nokta (ekran kesri uzayında) */
+  function kenar() {
+    var pay = 0.14;
+    var k = Math.floor(Math.random() * 4);
+    if (k === 0) return { x: -pay, y: Math.random(), k: k };
+    if (k === 1) return { x: 1 + pay, y: Math.random(), k: k };
+    if (k === 2) return { x: Math.random(), y: -pay, k: k };
+    return { x: Math.random(), y: 1 + pay, k: k };
+  }
+
+  function yeniUcus() {
+    var i = Math.floor(Math.random() * TURLER.length);
+    var t = TURLER[i];
+
+    var a = kenar(), b = kenar(), dene = 0;
+    while ((b.k === a.k || Math.hypot(b.x - a.x, b.y - a.y) < 0.8) && dene++ < 14) b = kenar();
+
+    /* Yay: orta noktadan rotaya dik sapma. Uçuşların ~%35'i belirgin yay
+       çizer, kalanı neredeyse düz gider. */
+    var dx = b.x - a.x, dy = b.y - a.y;
+    var uz = Math.hypot(dx, dy) || 1;
+    var sapma = (Math.random() < 0.35 ? 0.18 + Math.random() * 0.3 : Math.random() * 0.07)
+              * (Math.random() < 0.5 ? -1 : 1);
+
+    return {
+      tur: i,
+      boy: (9 + Math.random() * 8) * (t.olcek || 1) * 2,
+      a: a,
+      b: b,
+      k: { x: (a.x + b.x) / 2 - dy / uz * sapma, y: (a.y + b.y) / 2 + dx / uz * sapma },
+      sure: 14 + Math.random() * 13,
+      gecen: -Math.random() * 4,
+      vurgulu: Math.random() < 0.25
+    };
+  }
+
+  function nokta(u, t) {
+    var s = 1 - t;
+    return {
+      x: (s * s * u.a.x + 2 * s * t * u.k.x + t * t * u.b.x) * g,
+      y: (s * s * u.a.y + 2 * s * t * u.k.y + t * t * u.b.y) * y
+    };
+  }
+
+  var oncekiZaman = 0;
+  function kare(zaman) {
+    var fark = oncekiZaman ? Math.min((zaman - oncekiZaman) / 1000, 0.05) : 0;
+    oncekiZaman = zaman;
+
+    cx.clearRect(0, 0, g, y);
+    cx.lineWidth = 1.2;
+    cx.lineCap = "round";
+
+    for (var i = 0; i < ucuslar.length; i++) {
+      var u = ucuslar[i];
+      u.gecen += fark;
+
+      if (u.gecen >= u.sure) { ucuslar[i] = yeniUcus(); continue; }
+      if (u.gecen < 0) continue;
+
+      var t = u.gecen / u.sure;
+
+      /* İz: kalkıştan şu ana kadar geçilen yol */
+      cx.beginPath();
+      for (var j = 0; j <= 36; j++) {
+        var p = nokta(u, t * (j / 36));
+        if (j === 0) cx.moveTo(p.x, p.y); else cx.lineTo(p.x, p.y);
+      }
+      cx.strokeStyle = u.vurgulu ? renkVurgu : renkIz;
+      cx.stroke();
+
+      /* Uçak: burnu hareket vektörüne bakar */
+      var p1 = nokta(u, t);
+      var p0 = nokta(u, Math.max(0, t - 0.008));
+      var gg = u.boy, yy = gg * TURLER[u.tur].oran;
+      cx.save();
+      cx.translate(p1.x, p1.y);
+      cx.rotate(Math.atan2(p1.y - p0.y, p1.x - p0.x));
+      cx.drawImage(boyali[u.tur], -gg / 2, -yy / 2, gg, yy);
+      cx.restore();
+    }
+
+    requestAnimationFrame(kare);
+  }
+
+  var yuklenen = 0, hatali = false;
+  TURLER.forEach(function (t, i) {
+    var im = new Image();
+    im.onload = function () { gorseller[i] = im; if (++yuklenen === TURLER.length) basla(); };
+    im.onerror = function () { hatali = true; if (++yuklenen === TURLER.length) basla(); };
+    im.src = t.src;
+  });
+
+  function basla() {
+    if (hatali) { tuval.remove(); return; }   // görsel gelmediyse hiç çizme
+    hazir = true;
+    olcu();
+    boya();
+    var adet = window.innerWidth < 700 ? 3 : 6;
+    for (var i = 0; i < adet; i++) {
+      var u = yeniUcus();
+      u.gecen = Math.random() * u.sure * 0.75;   // ilk kare bos kalmasin
+      ucuslar.push(u);
+    }
+    window.addEventListener("resize", olcu);
+    requestAnimationFrame(kare);
+  }
 })();
 </script>
 </body>

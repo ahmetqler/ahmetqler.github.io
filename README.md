@@ -108,3 +108,29 @@ public yaparsan adresini `depo` alanına yazman yeterli, düğme kendiliğinden 
 
 Canlı linkler senin Vercel dağıtımlarına gidiyor. Bir tanesini herkese açık
 göstermek istemiyorsan o projenin `canli` alanını boşalt, düğme kaybolur.
+
+## Arka plandaki uçaklar
+
+Sayfanın arkasında iz bırakarak uçan uçaklar var (`index.html` sonundaki
+"ARKA PLANDA UÇAN UÇAKLAR" bloğu). Skyphrase'in Flutter'daki
+`FlightTrailsBackground` widget'ından uyarlandı; uçak görselleri de oradan
+geldi (`ucaklar/`).
+
+Görsellerin yalnızca alfa kanalı kullanılıyor, gövde tema rengiyle boyanıyor —
+Flutter'da `BlendMode.srcIn`, burada canvas'ın `source-in` birleştirmesi. Tema
+değişince kendiliğinden yeniden boyanıyor.
+
+Ayarlar modülün başında:
+
+| Ne | Nerede | Şu an |
+|---|---|---|
+| Uçak sayısı | `basla()` içinde `adet` | dar ekranda 3, geniş ekranda 6 |
+| Görünürlük | `boya()` içindeki alfa değerleri | uçak 0.30, iz 0.13, vurgulu iz 0.20 |
+| Hız | `yeniUcus()` içinde `sure` | geçiş başına 14-27 saniye |
+| Boy | `yeniUcus()` içinde `boy` | 18-34 piksel |
+| Yay oranı | `yeniUcus()` içinde `sapma` | uçuşların ~%35'i belirgin yay çizer |
+
+Kalp ve gösteri formasyonları alınmadı; sadece düz ve yay rotalar var.
+
+İşletim sisteminde "hareketi azalt" açıksa animasyon hiç başlamıyor, canvas
+oluşturulmuyor. Görseller yüklenemezse de sessizce devre dışı kalıyor.
