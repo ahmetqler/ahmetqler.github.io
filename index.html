@@ -1,0 +1,1176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ahmed Talha Güler</title>
+<meta name="description" content="Ahmed Talha Güler — aeronautical engineering student building web and mobile apps with Next.js and Flutter.">
+<meta property="og:title" content="Ahmed Talha Güler">
+<meta property="og:description" content="Apps and games I have built.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+/* ---------- jetonlar ---------- */
+:root{
+  color-scheme: light;
+  --kagit:#F1EDF0;
+  --yuzey:#FFFFFF;
+  --yuzey2:#F8F5F8;
+  --murekkep:#1A1D2B;
+  --soluk:#6B6678;
+  --cizgi:#DED6E0;
+  --cizgi-koyu:#BFB4C2;
+  --isaret:#B01E63;
+  --isaret-zemin:#FBE8F0;
+  --iyi:#1C7048;
+  --iyi-zemin:#E3F2E9;
+  --grid:rgba(26,29,43,.05);
+  --golge:0 1px 2px rgba(26,29,43,.06), 0 8px 28px rgba(26,29,43,.07);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --kagit:#131520;
+    --yuzey:#1B1E2A;
+    --yuzey2:#232634;
+    --murekkep:#E9E6EE;
+    --soluk:#948FA4;
+    --cizgi:#2E3244;
+    --cizgi-koyu:#414761;
+    --isaret:#FF619A;
+    --isaret-zemin:#3A1A2B;
+    --iyi:#5CD49B;
+    --iyi-zemin:#16301F;
+    --grid:rgba(233,230,238,.055);
+    --golge:0 1px 2px rgba(0,0,0,.4), 0 14px 40px rgba(0,0,0,.45);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --kagit:#131520;
+  --yuzey:#1B1E2A;
+  --yuzey2:#232634;
+  --murekkep:#E9E6EE;
+  --soluk:#948FA4;
+  --cizgi:#2E3244;
+  --cizgi-koyu:#414761;
+  --isaret:#FF619A;
+  --isaret-zemin:#3A1A2B;
+  --iyi:#5CD49B;
+  --iyi-zemin:#16301F;
+  --grid:rgba(233,230,238,.055);
+  --golge:0 1px 2px rgba(0,0,0,.4), 0 14px 40px rgba(0,0,0,.45);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background-color:var(--kagit);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:56px 56px, 56px 56px;
+  color:var(--murekkep);
+  font-family:"Source Serif 4", Georgia, "Times New Roman", serif;
+  font-size:17px;
+  line-height:1.62;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--isaret);outline-offset:3px;border-radius:2px}
+
+.kap{max-width:1000px;margin:0 auto;padding:0 22px}
+
+/* ---------- ortak ---------- */
+.etiket{
+  font-family:"IBM Plex Mono", ui-monospace, Consolas, monospace;
+  font-size:10.5px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--soluk);
+}
+h1,h2,h3{font-family:"Archivo", "Helvetica Neue", Arial, sans-serif;text-wrap:balance;margin:0}
+
+/* ---------- antet bloğu ---------- */
+header{padding:64px 0 0}
+.serit{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:26px}
+.serit .etiket{display:flex;align-items:center;gap:10px}
+.serit .etiket::before{content:"";width:30px;height:1px;background:var(--isaret);flex:none}
+.ustSag{display:flex;align-items:center;gap:10px;flex:none}
+
+.dil{display:flex;border:1px solid var(--cizgi);border-radius:999px;overflow:hidden}
+.dil button{
+  font-family:"IBM Plex Mono", monospace;font-size:10.5px;font-weight:500;letter-spacing:.1em;
+  background:transparent;border:0;color:var(--soluk);
+  padding:8px 11px;cursor:pointer;line-height:1;
+  transition:background .16s ease,color .16s ease;
+}
+.dil button + button{border-left:1px solid var(--cizgi)}
+.dil button:hover{color:var(--murekkep)}
+.dil button[aria-pressed="true"]{background:var(--murekkep);color:var(--kagit)}
+
+.tema{
+  width:34px;height:34px;padding:0;flex:none;
+  color:var(--soluk);background:transparent;border:1px solid var(--cizgi);
+  border-radius:999px;cursor:pointer;
+  display:grid;place-items:center;
+  transition:color .16s ease,border-color .16s ease;
+}
+.tema svg{width:15px;height:15px;display:block}
+.tema:hover{color:var(--isaret);border-color:var(--isaret)}
+
+.adim{
+  font-size:clamp(40px,7.8vw,68px);font-weight:800;letter-spacing:-.034em;line-height:1;
+  margin-bottom:20px;
+}
+/* adı aşağıdaki antet bloğuna bağlayan ince çizgi */
+.altcizgi{height:1px;background:var(--cizgi);position:relative;margin-bottom:24px}
+.altcizgi::before{content:"";position:absolute;inset:0 auto 0 0;width:72px;background:var(--isaret)}
+
+.giris{font-size:18.5px;max-width:32em;margin:0 0 36px;text-wrap:pretty}
+.giris em{color:var(--isaret);font-style:normal;font-weight:600}
+
+.antet{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border:1px solid var(--cizgi-koyu);background:var(--yuzey);margin-bottom:66px;
+}
+.hucre{
+  padding:15px 16px;border-right:1px solid var(--cizgi);min-width:0;
+  display:flex;flex-direction:column;gap:7px;
+}
+.hucre:last-child{border-right:none}
+.hucre .etiket{display:flex;align-items:center;gap:7px}
+.hucre .etiket::before{content:"";width:9px;height:1px;background:var(--isaret);flex:none}
+.hucre .deger{
+  font-family:"IBM Plex Mono", monospace;font-size:13px;line-height:1.5;
+  margin-top:0;overflow-wrap:anywhere;
+}
+.hucre a{text-decoration:none;border-bottom:1px solid var(--cizgi-koyu)}
+.hucre a:hover{color:var(--isaret);border-bottom-color:var(--isaret)}
+@media (max-width:820px){
+  .antet{grid-template-columns:repeat(2,1fr)}
+  .hucre:nth-child(2n){border-right:none}
+  .hucre:nth-child(-n+2){border-bottom:1px solid var(--cizgi)}
+}
+/* dar ekranda tek sütun: etiket solda, değer sağda — künye satırı gibi */
+@media (max-width:580px){
+  .antet{grid-template-columns:1fr}
+  .hucre{
+    display:grid;grid-template-columns:88px 1fr;gap:14px;align-items:baseline;
+    border-right:none;border-bottom:1px solid var(--cizgi);padding:14px 15px;
+  }
+  .hucre:last-child{border-bottom:none}
+}
+
+/* ---------- bölüm başlığı ---------- */
+.bolum-bas{display:flex;align-items:baseline;gap:14px;margin-bottom:22px}
+.bolum-bas h2{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.bolum-bas .rule{flex:1;height:1px;background:var(--cizgi)}
+.bolum-bas .sayi{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--soluk)}
+
+/* ---------- proje kütüğü ---------- */
+.kutuk{display:flex;flex-direction:column;gap:14px;margin-bottom:66px}
+.proje{
+  display:grid;grid-template-columns:58px 1fr auto;align-items:center;gap:20px;
+  width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer;
+  background:var(--yuzey);border:1px solid var(--cizgi);border-left:3px solid var(--cizgi-koyu);
+  padding:20px 22px;
+  transition:border-left-color .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+.proje:hover,.proje:focus-visible{border-left-color:var(--isaret);transform:translateX(3px);box-shadow:var(--golge)}
+.proje:hover .glif,.proje:hover .ac{color:var(--isaret)}
+.proje.sessiz{cursor:default;border-left-style:dashed;background:var(--yuzey2)}
+.proje.sessiz:hover{transform:none;box-shadow:none;border-left-color:var(--cizgi-koyu)}
+.proje.sessiz:hover .glif{color:var(--murekkep)}
+.glif{color:var(--murekkep);transition:color .18s ease;display:block}
+.glif svg{width:46px;height:46px;display:block}
+.govde{display:block;min-width:0}
+.ust{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-bottom:5px}
+.ad{font-family:"Archivo",Arial,sans-serif;font-size:21px;font-weight:700;letter-spacing:-.015em}
+.ozet{display:block;color:var(--soluk);font-size:15.5px;line-height:1.5;max-width:52ch}
+.olcu{
+  display:block;margin-top:9px;font-family:"IBM Plex Mono",monospace;font-size:11.5px;
+  color:var(--soluk);font-variant-numeric:tabular-nums;
+}
+.ac{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--soluk);white-space:nowrap;transition:color .18s ease;
+}
+@media (max-width:700px){
+  .proje{grid-template-columns:40px 1fr;gap:15px;padding:17px 16px}
+  .glif svg{width:34px;height:34px}
+  .ac{display:none}
+}
+
+.rozet{
+  font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:500;
+  letter-spacing:.09em;text-transform:uppercase;padding:3px 8px;border-radius:3px;line-height:1.5;
+  display:inline-block;
+}
+.rozet.yayinda{background:var(--iyi-zemin);color:var(--iyi)}
+.rozet.gelisiyor{background:var(--isaret-zemin);color:var(--isaret)}
+.rozet.yakinda{background:var(--yuzey);color:var(--murekkep);border:1px solid var(--cizgi-koyu)}
+
+/* ---------- alt bilgi ---------- */
+footer{border-top:1px solid var(--cizgi);padding:30px 0 64px}
+.baglar{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 22px}
+.bag{
+  display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+  font-family:"IBM Plex Mono",monospace;font-size:12.5px;
+  border:1px solid var(--cizgi-koyu);padding:9px 14px;background:var(--yuzey);
+  transition:background .16s ease,color .16s ease,border-color .16s ease;
+}
+.bag:hover{background:var(--murekkep);color:var(--kagit);border-color:var(--murekkep)}
+.bag svg{width:15px;height:15px;flex:none}
+.imza{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--soluk);letter-spacing:.04em;margin:0}
+
+/* ---------- künye (detay) ---------- */
+.perde{
+  position:fixed;inset:0;z-index:50;display:none;
+  background:rgba(12,13,20,.55);backdrop-filter:blur(3px);
+  padding:20px;overflow-y:auto;
+}
+.perde.acik{display:flex;align-items:flex-start;justify-content:center}
+.kunye{
+  background:var(--yuzey);border:1px solid var(--cizgi-koyu);box-shadow:var(--golge);
+  width:100%;max-width:780px;margin:auto;
+}
+.kunye-bas{
+  display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:start;
+  padding:24px 26px 20px;border-bottom:1px solid var(--cizgi);
+}
+.kunye-bas .glif{color:var(--isaret)}
+.kunye-bas h3{font-size:27px;font-weight:800;letter-spacing:-.025em;margin-bottom:8px}
+.kapat{
+  background:transparent;border:1px solid var(--cizgi);color:var(--soluk);
+  width:34px;height:34px;cursor:pointer;font-size:15px;line-height:1;
+  display:flex;align-items:center;justify-content:center;flex:none;
+}
+.kapat:hover{background:var(--murekkep);color:var(--kagit);border-color:var(--murekkep)}
+.kunye-govde{padding:24px 26px 28px}
+.kunye-govde > * + *{margin-top:26px}
+.anlati{margin:0;font-size:17px;line-height:1.65}
+
+.olcu-satir{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));border:1px solid var(--cizgi)}
+.olcu-satir div{padding:11px 14px;border-right:1px solid var(--cizgi)}
+.olcu-satir div:last-child{border-right:none}
+.olcu-satir .buyuk{
+  font-family:"Archivo",Arial,sans-serif;font-size:21px;font-weight:700;
+  font-variant-numeric:tabular-nums;margin-top:3px;letter-spacing:-.02em;
+}
+
+.liste{list-style:none;margin:0;padding:0}
+.liste li{
+  padding:12px 0;border-top:1px solid var(--cizgi);
+  display:grid;grid-template-columns:14px 1fr;gap:13px;font-size:15.5px;line-height:1.55;
+}
+.liste li:first-child{border-top:none;padding-top:0}
+.liste li::before{content:"";width:7px;height:7px;background:var(--isaret);margin-top:9px;transform:rotate(45deg)}
+.liste b{font-weight:600}
+
+.yigin{display:flex;flex-wrap:wrap;gap:7px}
+.cip{
+  font-family:"IBM Plex Mono",monospace;font-size:11.5px;
+  background:var(--yuzey2);border:1px solid var(--cizgi);padding:5px 9px;color:var(--soluk);
+}
+.not{font-size:14.5px;line-height:1.55;color:var(--soluk);border-left:2px solid var(--cizgi-koyu);padding-left:14px;margin:0}
+.vitrin{display:flex;gap:13px;overflow-x:auto;padding-bottom:8px}
+.vitrin figure{margin:0;flex:none;width:176px}
+.vitrin img{border:1px solid var(--cizgi-koyu);border-radius:10px;background:#000}
+.vitrin figcaption{
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--soluk);
+  margin-top:7px;letter-spacing:.03em;
+}
+@media (max-width:640px){
+  .kunye-bas{grid-template-columns:1fr auto;padding:20px 18px 17px}
+  .kunye-bas .glif{display:none}
+  .kunye-govde{padding:20px 18px 24px}
+  .perde{padding:0}
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important;transition:none !important}
+}
+</style>
+</head>
+<body>
+
+<div class="kap">
+  <header>
+    <div class="serit">
+      <span class="etiket" id="ustEtiket"></span>
+      <div class="ustSag">
+        <div class="dil" id="dil" role="group"></div>
+        <button class="tema" id="tema" type="button"></button>
+      </div>
+    </div>
+    <h1 class="adim">Ahmed Talha Güler</h1>
+    <div class="altcizgi"></div>
+    <p class="giris" id="giris"></p>
+    <div class="antet" id="antet"></div>
+  </header>
+
+  <main>
+    <div class="bolum-bas">
+      <h2 id="bolumBaslik"></h2>
+      <span class="rule"></span>
+      <span class="sayi" id="sayac"></span>
+    </div>
+    <div class="kutuk" id="kutuk"></div>
+  </main>
+
+  <footer>
+    <div class="etiket" id="iletisimEtiket"></div>
+    <div class="baglar" id="baglar"></div>
+    <p class="imza" id="imza"></p>
+  </footer>
+</div>
+
+<div class="perde" id="perde" role="dialog" aria-modal="true" aria-labelledby="kunye-ad">
+  <article class="kunye" id="kunye"></article>
+</div>
+
+<script>
+/* =====================================================================
+   DÜZENLEMEK İÇİN BURASI YETER.
+
+   Sayfa iki dilli. Her metnin `tr` ve `en` karşılığı var; ilk girişte
+   İngilizce açılır, sağ üstteki EN/TR düğmesi dili değiştirir ve seçim
+   tarayıcıda hatırlanır.
+
+   Yeni proje eklemek: PROJELER dizisine aynı şablonda bir nesne ekle —
+   dilden bağımsız alanlar (glif, teknoloji, görseller, linkler) dışarıda,
+   metinler tr/en altında durur.
+   ===================================================================== */
+
+var VARSAYILAN_DIL = "en";   // ilk girişte açılacak dil
+
+var KISI = {
+  eposta:   "ahmetqler@gmail.com",
+  github:   "https://github.com/ahmetqler",
+  linkedin: ""   // <-- LinkedIn adresini buraya yapıştır: "https://www.linkedin.com/in/kullanici-adin"
+};
+
+/* İkonlar — her proje için elle çizildi, tema rengini alır. */
+var GLIF = {
+  uygulama: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
+    '<rect x="8" y="8" width="32" height="32" rx="8"/>' +
+    '<path d="M24 32V17" stroke-linecap="round"/>' +
+    '<path d="m18 23 6-6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+
+  telsiz: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
+    '<circle cx="24" cy="14" r="3.4" fill="currentColor" stroke="none"/>' +
+    '<path d="M24 18 17 42M24 18l7 24M20 34h8" stroke-linecap="round"/>' +
+    '<path d="M16 20a11 11 0 0 1 0-12" stroke-linecap="round" opacity=".85"/>' +
+    '<path d="M32 8a11 11 0 0 1 0 12" stroke-linecap="round" opacity=".85"/>' +
+    '<path d="M11 24a18 18 0 0 1 0-20" stroke-linecap="round" opacity=".45"/>' +
+    '<path d="M37 4a18 18 0 0 1 0 20" stroke-linecap="round" opacity=".45"/></svg>',
+
+  tekstil: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
+    '<path d="M24 7v34" stroke-linecap="square"/><path d="M11 14h26" stroke-linecap="square"/>' +
+    '<path d="M11 14 5 27h12L11 14Z" stroke-linejoin="round"/>' +
+    '<path d="M37 14 31 27h12L37 14Z" stroke-linejoin="round"/>' +
+    '<path d="M15 41h18" stroke-linecap="square"/>' +
+    '<rect x="19" y="29" width="10" height="12" rx="1.5"/>' +
+    '<path d="M19 33h10M19 37h10" stroke-width="1.3" opacity=".6"/></svg>',
+
+  uyeler: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
+    '<circle cx="17" cy="14" r="6.5"/>' +
+    '<path d="M5 39c0-7 5.4-12 12-12s12 5 12 12" stroke-linecap="round"/>' +
+    '<path d="m30 25 5 5 10-11" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+
+  tempo: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
+    '<path d="M7 37a17 17 0 1 1 34 0" stroke-linecap="round"/>' +
+    '<path d="M24 37 34 22" stroke-linecap="round"/>' +
+    '<circle cx="24" cy="37" r="3" fill="currentColor" stroke="none"/>' +
+    '<path d="M24 14v4M11.5 18.5l2.8 2.8M36.5 18.5l-2.8 2.8" stroke-width="1.5" opacity=".55" stroke-linecap="round"/></svg>',
+
+  pusula: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
+    '<circle cx="24" cy="24" r="17"/>' +
+    '<path d="M31 17 21 21l-4 10 10-4Z" stroke-linejoin="round" fill="currentColor" fill-opacity=".18"/>' +
+    '<circle cx="24" cy="24" r="1.8" fill="currentColor" stroke="none"/>' +
+    '<path d="M24 4v3M24 41v3M4 24h3M41 24h3" stroke-width="1.6" stroke-linecap="round" opacity=".6"/></svg>',
+
+  kisiler: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
+    '<rect x="5" y="10" width="38" height="28" rx="3"/>' +
+    '<circle cx="17" cy="21" r="4.5"/>' +
+    '<path d="M10 32c0-4.2 3.1-7 7-7s7 2.8 7 7" stroke-linecap="round"/>' +
+    '<path d="M29 19h9M29 25h9M29 31h6" stroke-width="1.6" stroke-linecap="round" opacity=".7"/></svg>',
+
+  ev: '<svg viewBox="0 0 48 48" fill="currentColor" stroke="none" aria-hidden="true">' +
+    '<path d="M24 5 7 18h4v25h26V18h4L24 5Zm-9 17h18v21H15V22Z"/>' +
+    '<rect x="19" y="26" width="10" height="8" opacity=".35"/>' +
+    '<rect x="21" y="36" width="6" height="7"/>' +
+    '<rect x="30" y="8" width="4" height="7" opacity=".55"/></svg>',
+
+  notlar: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
+    '<path d="M11 5h17l9 9v29H11z" stroke-linejoin="round"/>' +
+    '<path d="M28 5v9h9" stroke-linejoin="round"/>' +
+    '<path d="M17 23h14M17 29h14M17 35h8" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>' +
+    '<path d="m38 27 1.6 4.4 4.4 1.6-4.4 1.6L38 39l-1.6-4.4L32 33l4.4-1.6z" fill="currentColor" stroke="none"/></svg>'
+};
+
+/* ---------- sayfa çerçevesi: başlıklar, etiketler, düğme yazıları ---------- */
+var METIN = {
+  tr: {
+    ustEtiket: "Portfolyo · 2026",
+    girisOnce: "Uçak mühendisliği okuyorum, boş vaktimde ",
+    girisVurgu: "insanların hayatını kolaylaştıran",
+    girisSonra: " uygulamalar yazıyorum: başkanı olduğum kulüpte üyelerin çalışma durumunu takip edip denetleyen, okullarda öğretilmeyen ICAO havacılık terminolojisini eğlenerek öğreten.",
+    antet: [
+      { etiket: "Bölüm",   deger: "Uçak Mühendisliği<br>İstanbul Gelişim Ü." },
+      { etiket: "Görev",   deger: "Başkan<br>İGÜ Havacılık Kulübü" },
+      { etiket: "Yığın",   deger: "Next.js · TypeScript<br>Flutter · Firebase" },
+      { etiket: "E-posta", deger: '<a href="mailto:ahmetqler@gmail.com">ahmetqler@gmail.com</a>' }
+    ],
+    bolumBaslik: "Uygulamalar",
+    sayac: function (n) { return n + " proje"; },
+    detay: "Detay →",
+    neYapiyor: "Neler yapıyor",
+    dikkat: "Dikkat edilen",
+    teknoloji: "Teknoloji",
+    ekrandan: "Ekrandan",
+    canli: "Canlı: ",
+    kaynak: "Kaynak kodu",
+    iletisim: "İletişim",
+    imza: "Ahmed Talha Güler · İstanbul",
+    kapat: "Kapat",
+    temaAcik: "Açık temaya geç",
+    temaKoyu: "Koyu temaya geç",
+    dilGrubu: "Dil"
+  },
+  en: {
+    ustEtiket: "Portfolio · 2026",
+    girisOnce: "I study aeronautical engineering, and in my spare time I build apps that ",
+    girisVurgu: "make people's lives easier",
+    girisSonra: ": one that tracks and reviews how members are doing in the club I lead, and one that turns ICAO aviation phraseology — which school never teaches — into a game.",
+    antet: [
+      { etiket: "Major", deger: "Aeronautical Eng.<br>Istanbul Gelisim Univ." },
+      { etiket: "Role",  deger: "President<br>IGU Aviation Club" },
+      { etiket: "Stack", deger: "Next.js · TypeScript<br>Flutter · Firebase" },
+      { etiket: "Email", deger: '<a href="mailto:ahmetqler@gmail.com">ahmetqler@gmail.com</a>' }
+    ],
+    bolumBaslik: "Apps",
+    sayac: function (n) { return n + " projects"; },
+    detay: "Details →",
+    neYapiyor: "What it does",
+    dikkat: "Care taken",
+    teknoloji: "Built with",
+    ekrandan: "Screens",
+    canli: "Live: ",
+    kaynak: "Source code",
+    iletisim: "Contact",
+    imza: "Ahmed Talha Güler · Istanbul",
+    kapat: "Close",
+    temaAcik: "Switch to light theme",
+    temaKoyu: "Switch to dark theme",
+    dilGrubu: "Language"
+  }
+};
+
+/* ---------- projeler ---------- */
+var PROJELER = [
+  {
+    ad: "GANO",
+    glif: GLIF.uygulama,
+    rozetTipi: "yakinda",
+    gizli: true,
+    teknoloji: [],
+    gorseller: [],
+    canli: "",
+    depo: "",
+    tr: {
+      durum: "Çok yakında App Store'da",
+      ozet: "Çok yakında App Store'da.",
+      olcu: "iOS · yayına hazırlanıyor"
+    },
+    en: {
+      durum: "Coming soon to the App Store",
+      ozet: "Coming soon to the App Store.",
+      olcu: "iOS · preparing for release"
+    }
+  },
+
+  {
+    ad: "Skyphrase",
+    glif: GLIF.telsiz,
+    rozetTipi: "gelisiyor",
+    teknoloji: ["Flutter","Dart","Provider","Firebase Auth","Cloud Firestore","flutter_tts","audioplayers","shared_preferences"],
+    gorseller: [],
+    canli: "",
+    depo: "",
+    tr: {
+      durum: "Geliştirmede",
+      ozet: "Havacılık terminolojisini ve ICAO telsiz frazeolojisini oyunlaştırarak öğreten Flutter uygulaması. Duolingo tarzı ders akışı, gerçek havacılık içeriğiyle.",
+      olcu: "3 ünite · 7 ders · 28 egzersiz · TR + EN",
+      anlati: "Havacılık İngilizcesi ezberlenmiyor, tekrarla oturuyor. Fonetik alfabeyi ve telsiz kalıplarını ders kitabından çalışmak yerine günde beş dakikalık turlara böldüm. İçerik JSON dosyalarında duruyor — yeni ders eklemek için kod yazmak gerekmiyor.",
+      sayilar: [
+        { ad: "Ünite", deger: "3" },
+        { ad: "Ders", deger: "7" },
+        { ad: "Egzersiz", deger: "28" },
+        { ad: "Dil", deger: "TR + EN" }
+      ],
+      ozellikler: [
+        "<b>Gerçek havacılık içeriği</b> — ICAO fonetik alfabe (Alfa, Bravo, Charlie), temel telsiz frazeolojisi (Roger, Wilco, Affirm) ve havacılık sayıları (Tree, Fife, Niner).",
+        "<b>Üç egzersiz tipi</b> — çoktan seçmeli, eşleştirme ve kelime bankasıyla cümle kurma.",
+        "<b>İlerleme sistemi</b> — XP, günlük seri, sırayla açılan dersler, rozetler ve seri takvimi.",
+        "<b>Tekrar oturumları</b> — yanlış yapılan sorular ayrı bir havuzda toplanıp tekrar önüne geliyor.",
+        "<b>Ders içeriği veriden geliyor</b> — üniteler ve egzersizler <code>assets/courses</code> altındaki JSON dosyalarında. Yeni ders eklemek için kod değişikliği gerekmiyor.",
+        "<b>Sesli okuma</b> — frazeoloji kalıpları TTS ile seslendiriliyor; telsizde nasıl duyulacağı kulakla öğreniliyor.",
+        "<b>Hesap ve arkadaşlar</b> — Firebase Auth ile giriş, Firestore'da ilerleme; arkadaş listesi ve rozet karşılaştırması."
+      ],
+      guvence: "Marka çatışmasını önlemek için renk paleti ve maskot bilinçli olarak Duolingo'dan uzak tutuldu; özgün bir kimlikle çizildi."
+    },
+    en: {
+      durum: "In progress",
+      ozet: "A Flutter app that turns aviation terminology and ICAO radio phraseology into a game. Duolingo-style lesson flow, built on real aviation content.",
+      olcu: "3 units · 7 lessons · 28 exercises · TR + EN",
+      anlati: "Aviation English isn't memorised, it settles in through repetition. Instead of working through a textbook, I cut the phonetic alphabet and the radio patterns into five-minute rounds. The content lives in JSON files — adding a lesson takes no code at all.",
+      sayilar: [
+        { ad: "Units", deger: "3" },
+        { ad: "Lessons", deger: "7" },
+        { ad: "Exercises", deger: "28" },
+        { ad: "Languages", deger: "TR + EN" }
+      ],
+      ozellikler: [
+        "<b>Real aviation content</b> — the ICAO phonetic alphabet (Alfa, Bravo, Charlie), core radio phraseology (Roger, Wilco, Affirm) and aviation numbers (Tree, Fife, Niner).",
+        "<b>Three exercise types</b> — multiple choice, matching pairs, and building sentences from a word bank.",
+        "<b>Progress system</b> — XP, a daily streak, lessons that unlock in order, badges and a streak calendar.",
+        "<b>Review sessions</b> — questions you got wrong go into their own pool and come back around.",
+        "<b>Lessons come from data</b> — units and exercises live in JSON under <code>assets/courses</code>. Adding a lesson needs no code change.",
+        "<b>Spoken phraseology</b> — patterns are read aloud with TTS, so you learn how they actually sound on the radio.",
+        "<b>Accounts and friends</b> — Firebase Auth sign-in, progress in Firestore, a friend list and badge comparison."
+      ],
+      guvence: "To avoid any brand clash, the palette and the mascot were deliberately kept away from Duolingo's and drawn with their own identity."
+    }
+  },
+
+  {
+    ad: "Tekstil ERP",
+    glif: GLIF.tekstil,
+    rozetTipi: "gelisiyor",
+    teknoloji: ["Next.js 15","React 19","TypeScript","Prisma","SQLite / PostgreSQL","Zod","JWT (jose)","Tailwind 4"],
+    gorseller: [],
+    canli: "",
+    depo: "",
+    tr: {
+      durum: "Geliştirmede",
+      ozet: "Tekstil imalatı, toptan ve perakende satış yapan bir şirket için uçtan uca ERP. Muhasebesi Tekdüzen Hesap Planı'na göre çift taraflı.",
+      olcu: "134 test · UBL-TR 1.2 · 90 günlük nakit projeksiyonu",
+      anlati: "Bir atölyenin defteri, stoğu ve üretimi ayrı yerlerde duruyordu; biri değişince diğeri elle güncelleniyordu. Burada tek işlem hepsine birden işliyor: fatura kesilince stok düşüyor, yevmiye fişi yazılıyor, cari bakiye ve vade listesi kendiliğinden güncelleniyor. Dengesiz bir fiş veritabanına yazılamıyor.",
+      sayilar: [
+        { ad: "Birim testi", deger: "79" },
+        { ad: "Bütünlük testi", deger: "55" },
+        { ad: "Nakit projeksiyonu", deger: "90 gün" },
+        { ad: "e-Fatura", deger: "UBL-TR 1.2" }
+      ],
+      ozellikler: [
+        "<b>Muhasebe</b> — Tekdüzen Hesap Planı'na göre çift taraflı kayıt. Her fatura, tahsilat ve üretim otomatik yevmiye fişi üretiyor. Mizan, gelir tablosu, KDV özeti ve yevmiye defteri mali müşavire olduğu gibi verilebiliyor.",
+        "<b>Cari</b> — müşteri, tedarikçi, fasoncu; bakiye, ekstre, risk limiti, vade.",
+        "<b>Stok</b> — renk × beden varyant matrisi, çok depolu, hareketli ağırlıklı ortalama maliyet, kritik seviye uyarısı, parti/lot takibi.",
+        "<b>Üretim</b> — reçete (fire dahil), iş emri, fason işçilik. İş emri bitince hammadde düşüyor, mamul gerçek maliyetiyle stoğa giriyor ve 7/A maliyet hesaplarıyla fiş yazılıyor.",
+        "<b>Fatura</b> — satış, alış, iade; KDV, iskonto, KDV tevkifatı (fason tekstil 608 dahil), döviz. Yazdırılabilir fatura ve UBL-TR 1.2 XML çıktısı.",
+        "<b>Kasa ve banka</b> — tahsilat, ödeme, çek/senet portföyü, fatura eşleştirme.",
+        "<b>Vadeler</b> — fatura vadeleri, çek/senet ve sabit giderler tek listede. 90 günlük nakit akış projeksiyonu; paranın biteceği gün panelde uyarı olarak çıkıyor."
+      ],
+      guvence: "79 birim testinin yanında 55 uçtan uca bütünlük testi var: ayrı bir veritabanında gerçek bir tekstil işletmesinin birkaç haftası baştan sona işleniyor ve her adımda mizanın dengede kaldığı doğrulanıyor.",
+      not: "Sistem e-Fatura XML'i üretir, göndermez. Gönderim için GİB başvurusu, mali mühür ve entegratör sözleşmesi gerekiyor; bunlar şirketin kendi başvurusuyla alınır."
+    },
+    en: {
+      durum: "In progress",
+      ozet: "An end-to-end ERP for a company that manufactures textiles and sells both wholesale and retail. Double-entry bookkeeping on the Turkish Uniform Chart of Accounts.",
+      olcu: "134 tests · UBL-TR 1.2 · 90-day cash projection",
+      anlati: "A workshop's ledger, stock and production each lived somewhere else; when one changed, the others were updated by hand. Here a single operation posts to all of them: issue an invoice and stock drops, a journal entry is written, the account balance and the due-date list update themselves. An unbalanced entry cannot be written to the database at all.",
+      sayilar: [
+        { ad: "Unit tests", deger: "79" },
+        { ad: "Integrity tests", deger: "55" },
+        { ad: "Cash projection", deger: "90 days" },
+        { ad: "e-Invoice", deger: "UBL-TR 1.2" }
+      ],
+      ozellikler: [
+        "<b>Accounting</b> — double-entry on the Turkish Uniform Chart of Accounts. Every invoice, payment and production run writes its own journal entry. Trial balance, income statement, VAT summary and journal can be handed to an accountant as they are.",
+        "<b>Accounts</b> — customers, suppliers and subcontractors; balance, statement, risk limit, payment terms.",
+        "<b>Stock</b> — colour × size variant matrix, multiple warehouses, moving weighted-average cost, low-stock alerts, batch and lot tracking.",
+        "<b>Production</b> — bill of materials (waste included), work orders, subcontracted labour. When an order closes, raw material is consumed, the finished goods enter stock at their real cost, and the entry is posted to the 7/A cost accounts.",
+        "<b>Invoicing</b> — sales, purchase and returns; VAT, discounts, VAT withholding (including code 608 for subcontracted textile work), foreign currency. Printable invoices and UBL-TR 1.2 XML output.",
+        "<b>Cash and bank</b> — collections, payments, a cheque and promissory-note portfolio, invoice matching.",
+        "<b>Due dates</b> — invoice terms, cheques and fixed costs in one list. A 90-day cash-flow projection flags the day the money runs out right on the dashboard."
+      ],
+      guvence: "Alongside 79 unit tests there are 55 end-to-end integrity tests: a real textile business's few weeks are replayed from start to finish in a separate database, verifying that the trial balance stays balanced at every step.",
+      not: "The system produces e-Invoice XML but does not transmit it. Transmission requires a tax-authority application, a financial seal and an integrator contract — all filed by the company itself."
+    }
+  },
+
+  {
+    ad: "Kulüp Takip",
+    glif: GLIF.uyeler,
+    rozetTipi: "yayinda",
+    teknoloji: ["JavaScript","Firebase Auth","Cloud Firestore","Firestore Security Rules","Firebase Hosting","PWA"],
+    gorseller: [
+      { src:"gorseller/kt-01-panel.png",    tr:"Panel — haftanın özeti", en:"Dashboard — the week at a glance" },
+      { src:"gorseller/kt-02-uyeler.png",   tr:"Üyeler ve roller",       en:"Members and roles" },
+      { src:"gorseller/kt-04-gorevler.png", tr:"Görevler",               en:"Tasks" },
+      { src:"gorseller/kt-07-yoklama.png",  tr:"Yoklama",                en:"Attendance" }
+    ],
+    canli: "",
+    depo: "",
+    tr: {
+      durum: "Yayında",
+      ozet: "Üniversite kulüpleri için üye, görev, etkinlik ve yoklama takibi. Çok kulüplü, çok kullanıcılı; yetkiler Firestore kurallarıyla sunucu tarafında zorlanıyor.",
+      olcu: "çok kulüplü · 3 rol kademesi · Firestore Security Rules",
+      anlati: "Kulüp başkanlığında yoklama defteri, görev listesi ve etkinlik takvimi üç ayrı WhatsApp mesajında yaşıyordu. Burada hepsi tek yerde ve aynı kulüpteki herkes aynı veriyi aynı anda görüyor. Yetki sınırları sadece arayüzde değil, veritabanı kurallarında da yazılı — arayüzü atlayıp API'ye gitmek işe yaramıyor.",
+      sayilar: [
+        { ad: "Rol kademesi", deger: "3" },
+        { ad: "Kulüp", deger: "Sınırsız" },
+        { ad: "Sunucu kodu", deger: "Yok" },
+        { ad: "Maliyet", deger: "0 ₺" }
+      ],
+      ozellikler: [
+        "<b>Panel</b> — aktif üye, açık görev, bu haftaki etkinlik ve geciken görev özetleri; yaklaşan görevlerim ve yaklaşan etkinlikler.",
+        "<b>Üyeler</b> — rol ve yönetici yetkisi, aktif/pasif durum, üye profili ve katılım istatistiği. Yeni üyeler davet kodu veya linkiyle katılıyor.",
+        "<b>Görevler</b> — üyeye atama, son teslim tarihi, durum akışı (Bekliyor / Devam ediyor / Tamamlandı) ve otomatik “Gecikti” işareti.",
+        "<b>Yoklama</b> — her etkinlik için Geldi / Gelmedi / Mazeretli, gelmeme sebebi, gelmeyenlerin otomatik listesi ve üye bazlı katılım oranı.",
+        "<b>Birimler</b> — kulüp içinde departmanlar; her üye bir birime bağlanıyor, birim başkanı yalnızca kendi biriminin üyesini, görevini ve etkinliğini yönetebiliyor.",
+        "<b>Çoklu kulüp</b> — bir hesap birden fazla kulübe üye olabiliyor; roller kulüp bazında. Aynı kişi bir kulüpte yönetici, diğerinde sade üye olabilir.",
+        "<b>Sunucusuz mimari</b> — Cloud Functions yok; her şey Firebase'in ücretsiz katmanında çalışıyor. Yetki kontrolü <code>firestore.rules</code> içinde."
+      ],
+      guvence: "Platform yöneticiliği hiçbir istemci kod yolundan verilemiyor — sadece Firebase Console'dan elle açılıyor, böylece kimse kendini bu role atayamıyor. Kulüp yöneticileri dahil."
+    },
+    en: {
+      durum: "Live",
+      ozet: "Member, task, event and attendance tracking for university clubs. Multi-club and multi-user, with permissions enforced server-side by Firestore rules.",
+      olcu: "multi-club · 3 permission tiers · Firestore Security Rules",
+      anlati: "Running a club, the attendance book, the task list and the event calendar lived in three separate WhatsApp messages. Here they are in one place and everyone in the club sees the same data at the same time. Permission boundaries are written into the database rules, not just the interface — skipping the UI and going straight to the API gets you nowhere.",
+      sayilar: [
+        { ad: "Permission tiers", deger: "3" },
+        { ad: "Clubs", deger: "Unlimited" },
+        { ad: "Server code", deger: "None" },
+        { ad: "Running cost", deger: "0" }
+      ],
+      ozellikler: [
+        "<b>Dashboard</b> — active members, open tasks, this week's events and overdue work; plus your own upcoming tasks and events.",
+        "<b>Members</b> — roles and admin rights, active/inactive status, member profiles and attendance statistics. New members join with an invite code or link.",
+        "<b>Tasks</b> — assign to a member, set a deadline, move through a status flow (Waiting / In progress / Done), with an automatic “Overdue” flag.",
+        "<b>Attendance</b> — Present / Absent / Excused per event, a reason for absence, an automatic list of who missed it, and an attendance rate per member.",
+        "<b>Departments</b> — units inside a club; each member belongs to one, and a department head can only manage their own department's members, tasks and events.",
+        "<b>Multiple clubs</b> — one account can belong to several clubs, and roles are per club. The same person can be an admin in one and an ordinary member in another.",
+        "<b>Serverless</b> — no Cloud Functions; everything runs on Firebase's free tier, with authorisation living in <code>firestore.rules</code>."
+      ],
+      guvence: "Platform administration cannot be granted through any client code path — it is switched on by hand in the Firebase Console, so nobody can assign themselves the role. Club admins included."
+    }
+  },
+
+  {
+    ad: "Tempo",
+    glif: GLIF.tempo,
+    rozetTipi: "yayinda",
+    teknoloji: ["Next.js","React","TypeScript","Prisma","PostgreSQL (Neon)","IndexedDB","Web Push (VAPID)","Vitest","Vercel"],
+    gorseller: [],
+    canli: "https://tempo-lake-ten.vercel.app",
+    depo: "",
+    tr: {
+      durum: "Yayında",
+      ozet: "Hedeflerinin haftalık tempo borcunu tutan, mevcut hızınla ne zaman varacağını söyleyen ve o hızı çalan şeyleri yüzüne vuran iOS PWA'sı.",
+      olcu: "5 yüzey · tek sayıdan türüyor · 4 basamaklı müdahale",
+      anlati: "Klasik hedef uygulamalarından farkı: hatırlatmıyor, hesap soruyor. Beş yüzeyin hepsi tek bir sayıdan türüyor — hedefin haftalık borcu ve o borcun ne kadarının kapandığı. Mac olmadığı için native Swift yok; PWA, iOS Shortcuts ve bir Scriptable widget'ı birlikte aynı işi görüyor.",
+      sayilar: [
+        { ad: "Yüzey", deger: "5" },
+        { ad: "Müdahale basamağı", deger: "4" },
+        { ad: "Kaynak veri", deger: "Cihazda" },
+        { ad: "Native kod", deger: "Yok" }
+      ],
+      ozellikler: [
+        "<b>Bugün</b> — hedeflerine bugün kaç dakika borçlusun, tek ekranda.",
+        "<b>Projeksiyon</b> — “bu gidişle Mart 2027”. Tempo düşünce varış tarihi kayıyor.",
+        "<b>Karar filtresi</b> — “haftada 3 saatlik bu iş, kilo hedefini 37 hafta geriletir”. Yeni bir işe evet demeden önce bedelini gösteriyor.",
+        "<b>Ekran süresi merdiveni</b> — günlük süreye göre dört basamak: sadece sayar, bildirim atar, uygulama açılınca 10 saniyelik geri sayımla araya girer, son basamakta her açılışta hesap sorar.",
+        "<b>Akşam hesabı</b> — tek soru, tek dokunuş cevap.",
+        "<b>iOS Shortcuts ve widget</b> — uygulama aç/kapa olayları Shortcuts otomasyonlarıyla, ana ekran widget'ı Scriptable ile besleniyor. İkisi de cihaz token'ıyla, yalnızca <code>Authorization</code> başlığında.",
+        "<b>IndexedDB kaynak, Postgres ayna</b> — senkron tek yönlü (telefon → sunucu), o yüzden çakışma çözümü yok. Veritabanı olmadan da çalışıyor."
+      ],
+      guvence: "Tempo motoru saf fonksiyonlardan oluşuyor: <code>Date.now()</code> çağırmıyor, veritabanına dokunmuyor. Diğer her şey oradan okuyor, testler de motoru doğrudan sınıyor.",
+      not: "Gerçek uygulama engellemesi yok — bunun için native Screen Time API ve Xcode gerekiyor. Son basamakta uygulama engellemez, hesap sorar."
+    },
+    en: {
+      durum: "Live",
+      ozet: "An iOS PWA that tracks the weekly pace your goals owe you, tells you when you'll actually arrive at your current speed, and names the things stealing that speed.",
+      olcu: "5 surfaces · all from one number · 4 escalation steps",
+      anlati: "What separates it from ordinary goal apps: it doesn't remind you, it holds you to account. All five surfaces derive from a single number — what your goal owes you this week, and how much of that you've closed. With no Mac there is no native Swift; a PWA, iOS Shortcuts and a Scriptable widget do the same job together.",
+      sayilar: [
+        { ad: "Surfaces", deger: "5" },
+        { ad: "Escalation steps", deger: "4" },
+        { ad: "Source of truth", deger: "On device" },
+        { ad: "Native code", deger: "None" }
+      ],
+      ozellikler: [
+        "<b>Today</b> — how many minutes you owe your goals today, on one screen.",
+        "<b>Projection</b> — “at this rate, March 2027”. Let the pace slip and the date slides with it.",
+        "<b>Decision filter</b> — “this 3-hour-a-week commitment pushes your weight goal back 37 weeks”. It prices a new obligation before you say yes.",
+        "<b>Screen-time ladder</b> — four steps by daily total: it only counts, then it notifies, then it interrupts with a 10-second countdown when you open the app, and at the last step it asks for an account every single time.",
+        "<b>Evening reckoning</b> — one question, one tap to answer.",
+        "<b>iOS Shortcuts and a widget</b> — app open/close events arrive through Shortcuts automations and the home-screen widget is fed by Scriptable. Both use a device token, carried only in the <code>Authorization</code> header.",
+        "<b>IndexedDB is the source, Postgres a mirror</b> — sync runs one way (phone → server), so there is no conflict resolution to get wrong. It works with no database at all."
+      ],
+      guvence: "The pace engine is built from pure functions: it never calls <code>Date.now()</code> and never touches the database. Everything else reads from it, and the tests exercise the engine directly.",
+      not: "There is no real app blocking — that needs the native Screen Time API and Xcode. At the final step the app doesn't block you, it asks you to account for the time."
+    }
+  },
+
+  {
+    ad: "Jack'in Pusulası",
+    glif: GLIF.pusula,
+    rozetTipi: "yayinda",
+    teknoloji: ["Next.js","React","TypeScript","Prisma","PostgreSQL (Neon)","Geolocation API","DeviceOrientation API","Vercel"],
+    gorseller: [],
+    canli: "https://jackin-pusulasi.vercel.app",
+    depo: "",
+    tr: {
+      durum: "Yayında",
+      ozet: "Haritasız arkadaş radarı. Arkadaşının tam konumunu kimse görmez; sadece yön, mesafe ve tazelik görünür.",
+      olcu: "koordinat paylaşılmıyor · sadece son konum tutuluyor",
+      anlati: "Kalabalıkta buluşmak için haritaya gerek yok; hangi yöne yürüyeceğini bilmek yeterli. Telefonu çevirdikçe arkadaşını işaret etmeye devam eden bir ok, bir mesafe ve “2 dk önce” yazan bir tazelik etiketi. Gizlilik sonradan eklenen bir ayar değil, veri modelinin kendisi.",
+      sayilar: [
+        { ad: "Paylaşılan veri", deger: "Yön + mesafe" },
+        { ad: "Konum geçmişi", deger: "Yok" },
+        { ad: "Kerteriz alt sınırı", deger: "50 m" },
+        { ad: "Veri ömrü", deger: "24 saat" }
+      ],
+      ozellikler: [
+        "<b>Dönen ok</b> — telefonu çevirdikçe arkadaşını işaret etmeye devam ediyor. Pusula sensöründen okunuyor.",
+        "<b>Yalnızca yön ve mesafe</b> — arkadaşlara giden yanıtta koordinat yok. Bunu üreten tek yer <code>buildRadarPayload()</code>; gizlilik tek bir fonksiyonda toplanmış.",
+        "<b>Geçmiş biriktirmek yapısal olarak imkânsız</b> — konum tablosunda kullanıcı kimliği birincil anahtar, yani bir kullanıcının yalnızca son konumu var. Eski satır diye bir şey oluşmuyor.",
+        "<b>Dürüst tazelik etiketi</b> — konum sadece uygulama ekranda açıkken güncelleniyor. Ekran kapanınca iki taraf için de duruyor ve etiket bunu söylüyor.",
+        "<b>Gürültü eşiği</b> — 50 metrenin altında kerteriz verilmiyor, çünkü o mesafede GPS yönü anlamsız.",
+        "<b>Kapalı kayıt</b> — davet kodunu bilmeyen hesap açamıyor."
+      ],
+      guvence: "",
+      not: "Konum ve pusula API'leri yalnızca HTTPS'te çalışıyor, o yüzden telefonda test gerçek adres üzerinden yapılıyor."
+    },
+    en: {
+      durum: "Live",
+      ozet: "A friend radar with no map. Nobody sees your friend's exact location — only a direction, a distance and how fresh the reading is.",
+      olcu: "no coordinates shared · only the last position stored",
+      anlati: "You don't need a map to meet someone in a crowd; you need to know which way to walk. An arrow that keeps pointing at your friend as you turn the phone, a distance, and a freshness label reading “2 min ago”. Privacy here isn't a setting bolted on afterwards — it is the data model itself.",
+      sayilar: [
+        { ad: "Data shared", deger: "Bearing + range" },
+        { ad: "Location history", deger: "None" },
+        { ad: "Bearing floor", deger: "50 m" },
+        { ad: "Data lifetime", deger: "24 hours" }
+      ],
+      ozellikler: [
+        "<b>A turning arrow</b> — it keeps pointing at your friend as you rotate the phone, read straight from the compass sensor.",
+        "<b>Bearing and distance only</b> — the response sent to friends carries no coordinates. Exactly one function builds it, so the whole privacy guarantee sits in one place.",
+        "<b>Accumulating history is structurally impossible</b> — the user id is the primary key of the location table, so a user has only their latest position. There is no such thing as an old row.",
+        "<b>An honest freshness label</b> — location updates only while the app is on screen. When the screen goes off it stops for both sides, and the label says so.",
+        "<b>A noise floor</b> — no bearing is given below 50 metres, because at that range GPS direction is meaningless.",
+        "<b>Closed sign-up</b> — without the invite code you cannot create an account."
+      ],
+      guvence: "",
+      not: "The location and compass APIs only work over HTTPS, so testing on a phone runs against a real deployed address."
+    }
+  },
+
+  {
+    ad: "Dış Beynim",
+    glif: GLIF.kisiler,
+    rozetTipi: "yayinda",
+    teknoloji: ["Next.js","React","TypeScript","Prisma","PostgreSQL","Web Push (VAPID)","Vercel Cron","PWA"],
+    gorseller: [],
+    canli: "https://dis-beynim.vercel.app",
+    depo: "",
+    tr: {
+      durum: "Yayında",
+      ozet: "Yeni tanıştığın insanlar hakkındaki notlarını, doğum günlerini ve etiketlerini tutan kişisel dış beyin. Çevrimdışı çalışır, doğum gününü sabah hatırlatır.",
+      olcu: "çevrimdışı · her sabah 09.00 kontrolü",
+      anlati: "Bir etkinlikte on kişiyle tanışıp ertesi gün hiçbirinin adını hatırlamamak. Kişiyi kaydederken nerede tanıştığını, ne konuştuğunuzu ve doğum gününü yazıyorsun; gerisini uygulama hatırlıyor. Telefon çevrimdışıyken de açılıyor, bağlantı gelince kendi kendine eşitleniyor.",
+      sayilar: [
+        { ad: "Çevrimdışı", deger: "Tam" },
+        { ad: "Doğum günü kontrolü", deger: "09.00" },
+        { ad: "Özel alan", deger: "Serbest" },
+        { ad: "Çakışma", deger: "Son yazan" }
+      ],
+      ozellikler: [
+        "<b>Kişi kartı</b> — ad, serbest not, doğum günü ve etiketler (İş, Arkadaş, Okul…).",
+        "<b>Kendi alanların</b> — kişiye özel alan tanımlanabiliyor; herkes için aynı formu doldurmak zorunda değilsin.",
+        "<b>Doğum günü bildirimi</b> — her sabah 09.00'da çalışan bir zamanlanmış görev doğum günlerini tarayıp web push gönderiyor.",
+        "<b>Klasörler</b> — kişileri gruplayıp ayrı listeler hâlinde gezebiliyorsun.",
+        "<b>Çevrimdışı çalışma ve eşitleme</b> — kayıtlar cihazda tutuluyor, sunucuyla eşitlenirken istemcinin yazdığı saat damgasına göre son yazan kazanıyor.",
+        "<b>Yumuşak silme</b> — silinen kişi işaretleniyor, satır anında yok edilmiyor; böylece silme işlemi diğer cihaza da taşınabiliyor."
+      ],
+      guvence: ""
+    },
+    en: {
+      durum: "Live",
+      ozet: "A personal external brain for the people you've just met — your notes about them, their birthdays and your tags. Works offline and reminds you of a birthday in the morning.",
+      olcu: "offline · checked every morning at 09:00",
+      anlati: "Meeting ten people at an event and remembering none of their names the next day. When you save someone you write down where you met, what you talked about and their birthday; the app remembers the rest. It opens with the phone offline and syncs itself once a connection comes back.",
+      sayilar: [
+        { ad: "Offline", deger: "Full" },
+        { ad: "Birthday check", deger: "09:00" },
+        { ad: "Custom fields", deger: "Free-form" },
+        { ad: "Conflicts", deger: "Last write" }
+      ],
+      ozellikler: [
+        "<b>Person card</b> — name, free-form notes, birthday and tags (Work, Friend, School…).",
+        "<b>Your own fields</b> — define a field that applies only to one person; you aren't forced to fill the same form for everybody.",
+        "<b>Birthday notifications</b> — a scheduled job runs every morning at 09:00, scans for birthdays and sends a web push.",
+        "<b>Folders</b> — group people and browse them as separate lists.",
+        "<b>Offline use and sync</b> — records are kept on the device, and when syncing to the server the client's own write clock decides which version wins.",
+        "<b>Soft delete</b> — a deleted person is flagged rather than destroyed on the spot, so the deletion can travel to your other device too."
+      ],
+      guvence: ""
+    }
+  },
+
+  {
+    ad: "Kulüp Evi",
+    glif: GLIF.ev,
+    rozetTipi: "gelisiyor",
+    teknoloji: ["Next.js 16","React 19","TypeScript","Canvas 2D","IndexedDB (idb)","Tailwind 4","PWA"],
+    gorseller: [],
+    canli: "",
+    depo: "",
+    tr: {
+      durum: "Geliştirmede",
+      ozet: "Kulübü 2D piksel bir bina olarak gösteren görev takip uygulaması. Görev verilince kişinin piksel karakteri ilgili odaya yürüyor ve orada çalışıyor.",
+      olcu: "sunucusuz · 0 sprite dosyası · çevrimdışı",
+      anlati: "Kulüp Takip'in listesi işi görüyordu ama kimse açıp bakmıyordu. Burada bina bir bakışta okunuyor: hangi oda dolu, kim nerede çalışıyor. Altında duran şey yine gerçek görev listesi — piksel ev onun görselleştirmesi.",
+      sayilar: [
+        { ad: "Sunucu", deger: "Yok" },
+        { ad: "Sprite dosyası", deger: "0" },
+        { ad: "Oyun motoru", deger: "Yok" },
+        { ad: "Veri", deger: "Cihazda" }
+      ],
+      ozellikler: [
+        "<b>Piksel bina</b> — odalar ve karakterler koddan çiziliyor. Sprite dosyası yok, her şey çalışma anında üretiliyor.",
+        "<b>Kendi oyun döngüsü</b> — canvas 2D üstünde, oyun motoru ya da çizim kütüphanesi kullanılmadan.",
+        "<b>Ev düzenleyici</b> — odaların yerleşimi uygulama içinden kuruluyor, kod değişikliği gerekmiyor.",
+        "<b>Otomatik bitiş</b> — süresi dolan görev bitmiş sayılıyor ama “otomatik bitti” rozetiyle ayrı görünüyor ve tek tıkla geri alınıyor. Gerçek iş, sırf süresi doldu diye bitmiş olmaz.",
+        "<b>Sunucusuz</b> — hesap, giriş ve veritabanı yok; her şey IndexedDB'de. Yedek JSON olarak dışa ve içe aktarılıyor.",
+        "<b>PWA</b> — telefona kurulabiliyor ve çevrimdışı açılıyor."
+      ],
+      guvence: ""
+    },
+    en: {
+      durum: "In progress",
+      ozet: "A task tracker that draws the club as a 2D pixel building. Assign a task and that person's pixel character walks to the right room and works there.",
+      olcu: "serverless · 0 sprite files · offline",
+      anlati: "The list in Kulüp Takip did the job, but nobody opened it. Here the building reads at a glance: which rooms are busy, who is working where. Underneath it is still a real task list — the pixel house is how that list is drawn.",
+      sayilar: [
+        { ad: "Server", deger: "None" },
+        { ad: "Sprite files", deger: "0" },
+        { ad: "Game engine", deger: "None" },
+        { ad: "Data", deger: "On device" }
+      ],
+      ozellikler: [
+        "<b>A pixel building</b> — rooms and characters are drawn from code. There are no sprite files; everything is generated at runtime.",
+        "<b>Its own game loop</b> — written on canvas 2D, with no game engine or drawing library.",
+        "<b>A house editor</b> — the room layout is built from inside the app, with no code change needed.",
+        "<b>Automatic completion</b> — a task whose time runs out counts as done, but is marked with an “auto-finished” badge and can be undone in one click. Real work isn't finished just because the clock ran out.",
+        "<b>Serverless</b> — no accounts, no sign-in, no database; everything lives in IndexedDB. Backups export and import as JSON.",
+        "<b>PWA</b> — installs on a phone and opens offline."
+      ],
+      guvence: ""
+    }
+  },
+
+  {
+    ad: "Ders Notlarım",
+    glif: GLIF.notlar,
+    rozetTipi: "yayinda",
+    teknoloji: ["HTML","CSS","JavaScript","Google Gemini API","localStorage","PWA"],
+    gorseller: [],
+    canli: "",
+    depo: "",
+    tr: {
+      durum: "Yayında",
+      ozet: "Ders notunun, PDF sayfasının ya da soru fotoğrafının analizini yapan tek dosyalık not defteri. Soruysa adım adım çözüyor, notsa sade anlatıyor.",
+      olcu: "tek HTML dosyası · build yok · bağımlılık yok",
+      anlati: "Derste tuttuğun not ile anlamadığın soru aynı defterde duruyor. Sayfanın fotoğrafını çekiyorsun, uygulama içeriğin soru mu ders notu mu olduğuna kendisi karar veriyor: soruysa adım adım çözüyor, notsa sadeleştirip anlatıyor. Tamamı tek bir HTML dosyası — kurulum, derleme ve paket yok.",
+      sayilar: [
+        { ad: "Dosya", deger: "1" },
+        { ad: "Bağımlılık", deger: "0" },
+        { ad: "Derleme adımı", deger: "Yok" },
+        { ad: "Dosya sınırı", deger: "15 MB" }
+      ],
+      ozellikler: [
+        "<b>Soru mu, not mu?</b> — yüklenen içeriğin türüne modelin kendisi karar veriyor; soruysa adım adım çözüm, notsa sade açıklama geliyor.",
+        "<b>Fotoğraf ve PDF</b> — sayfa fotoğrafı ya da PDF sayfası doğrudan yükleniyor, birden fazla dosya sırayla işleniyor.",
+        "<b>Markdown</b> — dönen cevap başlık, liste ve vurguyla biçimli görünüyor; kendi notlarını da Markdown yazabiliyorsun.",
+        "<b>Anahtarsız demo modu</b> — API anahtarı girilmeden de örnek bir cevapla uygulamanın nasıl çalıştığı görülebiliyor.",
+        "<b>Yoğunluk dayanıklılığı</b> — ücretsiz katman yoğun olduğunda istek kademeli olarak yeniden deneniyor, kullanıcıya kaçıncı denemede olduğu yazılıyor.",
+        "<b>iOS görünümü</b> — Ana Ekrana Ekle ile uygulama gibi açılıyor; açık ve koyu tema sistem ayarını izliyor.",
+        "<b>Notlar cihazda</b> — kayıtlar ve API anahtarı tarayıcının kendi deposunda tutuluyor, sunucu yok."
+      ],
+      guvence: "",
+      not: "Analiz için Google Gemini'nin ücretsiz katmanı kullanılıyor; anahtarı kullanıcı kendi hesabından alıp Ayarlar'a giriyor."
+    },
+    en: {
+      durum: "Live",
+      ozet: "A single-file notebook that reads a lecture note, a PDF page or a photo of a question. If it's a question it solves it step by step; if it's a note it explains it plainly.",
+      olcu: "one HTML file · no build · no dependencies",
+      anlati: "The notes you took in class and the question you couldn't crack live in the same notebook. You photograph the page and the app decides for itself whether it's a question or a note: a question gets a step-by-step solution, a note gets simplified and explained. The whole thing is one HTML file — no install, no build, no packages.",
+      sayilar: [
+        { ad: "Files", deger: "1" },
+        { ad: "Dependencies", deger: "0" },
+        { ad: "Build step", deger: "None" },
+        { ad: "Upload limit", deger: "15 MB" }
+      ],
+      ozellikler: [
+        "<b>Question or note?</b> — the model decides which it is on its own: a step-by-step solution for a question, a plain explanation for a note.",
+        "<b>Photos and PDFs</b> — upload a photo of a page or a PDF page directly; several files are processed in turn.",
+        "<b>Markdown</b> — answers come back formatted with headings, lists and emphasis, and you can write your own notes in Markdown too.",
+        "<b>Demo mode without a key</b> — you can see how the app behaves from a sample answer before entering any API key.",
+        "<b>Resilient under load</b> — when the free tier is busy the request is retried with backoff, and the user is told which attempt they're on.",
+        "<b>Native iOS feel</b> — Add to Home Screen and it opens like an app; light and dark follow the system setting.",
+        "<b>Notes stay on the device</b> — records and the API key live in the browser's own storage. There is no server."
+      ],
+      guvence: "",
+      not: "Analysis runs on Google Gemini's free tier; the user brings their own key from their own account and enters it in Settings."
+    }
+  }
+];
+
+/* ===================== buradan aşağısı arayüz ===================== */
+
+var IKON = {
+  posta: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="m3 6 9 7 9-7"/></svg>',
+  github: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.83c.56.1.77-.24.77-.54v-2.1c-3.12.68-3.78-1.3-3.78-1.3-.5-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.68.08-.68 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.63 1.22 3.28.94.1-.73.4-1.23.72-1.51-2.49-.28-5.11-1.25-5.11-5.56 0-1.23.44-2.23 1.16-3.02-.12-.29-.5-1.44.11-2.99 0 0 .94-.3 3.1 1.15a10.7 10.7 0 0 1 5.64 0c2.15-1.46 3.1-1.15 3.1-1.15.61 1.55.22 2.7.11 2.99.72.79 1.15 1.79 1.15 3.02 0 4.32-2.63 5.27-5.13 5.55.4.35.77 1.03.77 2.09v3.1c0 .3.2.65.78.54A11.2 11.2 0 0 0 12 .8Z"/></svg>',
+  linkedin: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 2.5 6 2.49 2.49 0 0 1 4.98 3.5ZM3 8.98h4v12H3v-12ZM9.5 8.98h3.83v1.64h.05a4.2 4.2 0 0 1 3.78-2.08c4.04 0 4.79 2.66 4.79 6.12v6.32h-4v-5.6c0-1.34-.03-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.96v5.7h-4v-12Z"/></svg>',
+  dis: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M14 4h6v6"/><path d="M20 4 10.5 13.5"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg>'
+};
+
+var TEMA_IKON = {
+  gunes: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">' +
+    '<circle cx="12" cy="12" r="4.2"/>' +
+    '<path d="M12 2.6v2.3M12 19.1v2.3M4.4 4.4l1.7 1.7M17.9 17.9l1.7 1.7M2.6 12h2.3M19.1 12h2.3M4.4 19.6l1.7-1.7M17.9 6.1l1.7-1.7" stroke-linecap="round"/></svg>',
+  ay: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">' +
+    '<path d="M20.2 14.6A8.6 8.6 0 0 1 9.4 3.8a8.6 8.6 0 1 0 10.8 10.8Z" stroke-linejoin="round"/></svg>'
+};
+
+function kacis(s) {
+  return String(s).replace(/[<>&]/g, function (c) {
+    return { "<": "&lt;", ">": "&gt;", "&": "&amp;" }[c];
+  });
+}
+
+var dilSimdi = VARSAYILAN_DIL;
+function M() { return METIN[dilSimdi]; }
+
+/* --- sayfa çerçevesini yaz --- */
+function cerceveCiz() {
+  var m = M();
+  document.documentElement.lang = dilSimdi;
+
+  document.getElementById("ustEtiket").textContent = m.ustEtiket;
+
+  document.getElementById("giris").innerHTML =
+    kacis(m.girisOnce) + "<em>" + kacis(m.girisVurgu) + "</em>" + kacis(m.girisSonra);
+
+  document.getElementById("antet").innerHTML = m.antet.map(function (h) {
+    return '<div class="hucre"><div class="etiket">' + kacis(h.etiket) +
+           '</div><div class="deger">' + h.deger + '</div></div>';
+  }).join("");
+
+  document.getElementById("bolumBaslik").textContent = m.bolumBaslik;
+  document.getElementById("sayac").textContent = m.sayac(PROJELER.length);
+  document.getElementById("iletisimEtiket").textContent = m.iletisim;
+  document.getElementById("imza").textContent = m.imza;
+
+  document.getElementById("dil").setAttribute("aria-label", m.dilGrubu);
+}
+
+/* --- proje kütüğünü yaz --- */
+function kutukCiz() {
+  var m = M();
+  var kutuk = document.getElementById("kutuk");
+  kutuk.innerHTML = "";
+
+  PROJELER.forEach(function (p, i) {
+    var y = p[dilSimdi];
+    var govde =
+      '<span class="glif">' + p.glif + '</span>' +
+      '<span class="govde">' +
+        '<span class="ust">' +
+          '<span class="ad">' + kacis(p.ad) + '</span>' +
+          '<span class="rozet ' + p.rozetTipi + '">' + kacis(y.durum) + '</span>' +
+        '</span>' +
+        '<span class="ozet">' + kacis(y.ozet) + '</span>' +
+        '<span class="olcu">' + kacis(y.olcu) + '</span>' +
+      '</span>';
+
+    var d;
+    if (p.gizli) {
+      d = document.createElement("div");
+      d.className = "proje sessiz";
+      d.innerHTML = govde;
+    } else {
+      d = document.createElement("button");
+      d.className = "proje";
+      d.type = "button";
+      d.setAttribute("aria-haspopup", "dialog");
+      d.innerHTML = govde + '<span class="ac">' + kacis(m.detay) + '</span>';
+      d.addEventListener("click", function () { ac(i); });
+    }
+    kutuk.appendChild(d);
+  });
+}
+
+/* --- iletişim bağlantıları --- */
+function baglarCiz() {
+  var baglar = document.getElementById("baglar");
+  baglar.innerHTML = "";
+  function bagVer(url, ikon, yazi) {
+    if (!url) return;
+    var a = document.createElement("a");
+    a.className = "bag";
+    a.href = url;
+    if (url.indexOf("http") === 0) { a.target = "_blank"; a.rel = "noopener noreferrer"; }
+    a.innerHTML = ikon + "<span>" + yazi + "</span>";
+    baglar.appendChild(a);
+  }
+  bagVer("mailto:" + KISI.eposta, IKON.posta, KISI.eposta);
+  bagVer(KISI.github, IKON.github, "github.com/ahmetqler");
+  bagVer(KISI.linkedin, IKON.linkedin, "LinkedIn");
+}
+
+/* --- künye --- */
+var perde = document.getElementById("perde");
+var kunye = document.getElementById("kunye");
+var sonOdak = null;
+
+function ac(i) {
+  var m = M();
+  var p = PROJELER[i];
+  var y = p[dilSimdi];
+  sonOdak = document.activeElement;
+
+  var sayilar = (y.sayilar && y.sayilar.length)
+    ? '<div class="olcu-satir">' + y.sayilar.map(function (s) {
+        return '<div><div class="etiket">' + kacis(s.ad) + '</div><div class="buyuk">' + kacis(s.deger) + '</div></div>';
+      }).join("") + '</div>'
+    : "";
+
+  var gorseller = (p.gorseller && p.gorseller.length)
+    ? '<section><div class="etiket" style="margin-bottom:12px">' + kacis(m.ekrandan) + '</div><div class="vitrin">' +
+      p.gorseller.map(function (g) {
+        var yazi = g[dilSimdi];
+        return '<figure><img src="' + g.src + '" alt="' + kacis(p.ad) + ' — ' + kacis(yazi) + '" loading="lazy">' +
+               '<figcaption>' + kacis(yazi) + '</figcaption></figure>';
+      }).join("") + '</div></section>'
+    : "";
+
+  var guvence = y.guvence
+    ? '<section><div class="etiket" style="margin-bottom:10px">' + kacis(m.dikkat) + '</div>' +
+      '<p class="anlati" style="font-size:15.5px">' + y.guvence + '</p></section>'
+    : "";
+
+  var not = y.not ? '<p class="not">' + kacis(y.not) + '</p>' : "";
+
+  var linkler = [];
+  if (p.canli) {
+    linkler.push('<a class="bag" href="' + p.canli + '" target="_blank" rel="noopener noreferrer">' + IKON.dis +
+      '<span>' + kacis(m.canli) + p.canli.replace("https://", "") + '</span></a>');
+  }
+  if (p.depo) {
+    linkler.push('<a class="bag" href="' + p.depo + '" target="_blank" rel="noopener noreferrer">' + IKON.github +
+      '<span>' + kacis(m.kaynak) + '</span></a>');
+  }
+  var baglantilar = linkler.length ? '<div class="baglar" style="margin:0">' + linkler.join("") + '</div>' : "";
+
+  kunye.innerHTML =
+    '<div class="kunye-bas">' +
+      '<span class="glif">' + p.glif + '</span>' +
+      '<div><h3 id="kunye-ad">' + kacis(p.ad) + '</h3>' +
+      '<span class="rozet ' + p.rozetTipi + '">' + kacis(y.durum) + '</span></div>' +
+      '<button class="kapat" type="button" aria-label="' + kacis(m.kapat) + '">&#10005;</button>' +
+    '</div>' +
+    '<div class="kunye-govde">' +
+      '<p class="anlati">' + kacis(y.anlati) + '</p>' +
+      sayilar +
+      '<section><div class="etiket" style="margin-bottom:12px">' + kacis(m.neYapiyor) + '</div>' +
+      '<ul class="liste">' + y.ozellikler.map(function (o) { return '<li><span>' + o + '</span></li>'; }).join("") + '</ul></section>' +
+      guvence + not + gorseller +
+      '<section><div class="etiket" style="margin-bottom:11px">' + kacis(m.teknoloji) + '</div>' +
+      '<div class="yigin">' + p.teknoloji.map(function (t) { return '<span class="cip">' + kacis(t) + '</span>'; }).join("") + '</div></section>' +
+      baglantilar +
+    '</div>';
+
+  perde.classList.add("acik");
+  document.body.style.overflow = "hidden";
+  var kapatDugme = kunye.querySelector(".kapat");
+  kapatDugme.addEventListener("click", kapat);
+  kapatDugme.focus();
+  perde.scrollTop = 0;
+}
+
+function kapat() {
+  perde.classList.remove("acik");
+  document.body.style.overflow = "";
+  kunye.innerHTML = "";
+  if (sonOdak && document.contains(sonOdak)) sonOdak.focus();
+}
+
+perde.addEventListener("click", function (e) { if (e.target === perde) kapat(); });
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape" && perde.classList.contains("acik")) kapat();
+});
+
+/* --- dil --- */
+var dilKutu = document.getElementById("dil");
+["en", "tr"].forEach(function (kod) {
+  var b = document.createElement("button");
+  b.type = "button";
+  b.textContent = kod.toUpperCase();
+  b.setAttribute("data-dil", kod);
+  b.addEventListener("click", function () { dilYaz(kod); });
+  dilKutu.appendChild(b);
+});
+
+function dilYaz(kod) {
+  dilSimdi = (kod === "tr") ? "tr" : "en";
+  try { localStorage.setItem("dil", dilSimdi); } catch (e) {}
+
+  [].forEach.call(dilKutu.children, function (b) {
+    b.setAttribute("aria-pressed", b.getAttribute("data-dil") === dilSimdi ? "true" : "false");
+  });
+
+  if (perde.classList.contains("acik")) kapat();
+  cerceveCiz();
+  kutukCiz();
+  baglarCiz();
+  temaEtiketiYaz();
+}
+
+/* --- tema --- */
+var temaDugme = document.getElementById("tema");
+function temaEtiketiYaz() {
+  var koyu = document.documentElement.getAttribute("data-theme") === "dark";
+  var m = M();
+  temaDugme.innerHTML = koyu ? TEMA_IKON.gunes : TEMA_IKON.ay;
+  temaDugme.setAttribute("aria-label", koyu ? m.temaAcik : m.temaKoyu);
+  temaDugme.setAttribute("title", koyu ? m.temaAcik : m.temaKoyu);
+}
+function temaYaz(t) {
+  document.documentElement.setAttribute("data-theme", t);
+  try { localStorage.setItem("tema", t); } catch (e) {}
+  temaEtiketiYaz();
+}
+temaDugme.addEventListener("click", function () {
+  temaYaz(document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark");
+});
+
+/* --- ilk çizim --- */
+(function () {
+  var kayitliDil = null, kayitliTema = null;
+  try { kayitliDil = localStorage.getItem("dil"); } catch (e) {}
+  try { kayitliTema = localStorage.getItem("tema"); } catch (e) {}
+
+  var sistemTema = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  document.documentElement.setAttribute("data-theme", kayitliTema || sistemTema);
+
+  dilYaz(kayitliDil || VARSAYILAN_DIL);
+})();
+</script>
+</body>
+</html>
