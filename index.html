@@ -213,6 +213,20 @@ header{padding:64px 0 0}
 .rozet.gelisiyor{background:var(--isaret-zemin);color:var(--isaret)}
 .rozet.yakinda{background:var(--yuzey);color:var(--murekkep);border:1px solid var(--cizgi-koyu)}
 
+/* ---------- kulup paneli ---------- */
+.kulup{
+  border:1px solid var(--cizgi-koyu);background:var(--yuzey);
+  padding:24px 26px;margin-bottom:66px;
+  display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;
+}
+.kulup h3{font-size:23px;font-weight:700;letter-spacing:-.022em;margin-bottom:9px}
+.kulup p{margin:0;color:var(--soluk);font-size:15.5px;line-height:1.55;max-width:44ch}
+.kulup .baglar{margin:0;flex-direction:column;align-items:stretch;flex-wrap:nowrap}
+@media (max-width:760px){
+  .kulup{grid-template-columns:1fr;gap:20px;padding:20px 18px}
+  .kulup .baglar{flex-direction:row;flex-wrap:wrap}
+}
+
 /* ---------- alt bilgi ---------- */
 footer{border-top:1px solid var(--cizgi);padding:30px 0 64px}
 .baglar{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 22px}
@@ -318,6 +332,13 @@ footer{border-top:1px solid var(--cizgi);padding:30px 0 64px}
       <span class="sayi" id="sayac"></span>
     </div>
     <div class="kutuk" id="kutuk"></div>
+
+    <div class="bolum-bas">
+      <h2 id="kulupBaslik"></h2>
+      <span class="rule"></span>
+      <span class="sayi" id="kulupRol"></span>
+    </div>
+    <div class="kulup" id="kulup"></div>
   </main>
 
   <footer>
@@ -345,6 +366,12 @@ footer{border-top:1px solid var(--cizgi);padding:30px 0 64px}
    ===================================================================== */
 
 var VARSAYILAN_DIL = "en";   // ilk girişte açılacak dil
+
+var KULUP = {
+  eposta:      "iguhavacilikkulubu@gmail.com",
+  instagram:   "https://www.instagram.com/iguhavacilikkulubu/",
+  instagramAd: "@iguhavacilikkulubu"
+};
 
 var KISI = {
   eposta:   "ahmetqler@gmail.com",
@@ -425,6 +452,10 @@ var METIN = {
       { etiket: "E-posta", deger: '<a href="mailto:ahmetqler@gmail.com">ahmetqler@gmail.com</a>' }
     ],
     bolumBaslik: "Uygulamalar",
+    kulupBaslik: "Kulüp",
+    kulupRol: "Başkan",
+    kulupAd: "İGÜ Havacılık Kulübü",
+    kulupNot: "Kulübün üye, görev ve yoklama takibi yukarıdaki Kulüp Takip uygulamasıyla yapılıyor.",
     sayac: function (n) { return n + " proje"; },
     detay: "Detay →",
     neYapiyor: "Neler yapıyor",
@@ -452,6 +483,10 @@ var METIN = {
       { etiket: "Email", deger: '<a href="mailto:ahmetqler@gmail.com">ahmetqler@gmail.com</a>' }
     ],
     bolumBaslik: "Apps",
+    kulupBaslik: "Club",
+    kulupRol: "President",
+    kulupAd: "IGU Aviation Club",
+    kulupNot: "The club's members, tasks and attendance are tracked with Kulüp Takip, listed above.",
     sayac: function (n) { return n + " projects"; },
     detay: "Details →",
     neYapiyor: "What it does",
@@ -938,6 +973,10 @@ var IKON = {
   posta: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="m3 6 9 7 9-7"/></svg>',
   github: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.83c.56.1.77-.24.77-.54v-2.1c-3.12.68-3.78-1.3-3.78-1.3-.5-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.68.08-.68 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.63 1.22 3.28.94.1-.73.4-1.23.72-1.51-2.49-.28-5.11-1.25-5.11-5.56 0-1.23.44-2.23 1.16-3.02-.12-.29-.5-1.44.11-2.99 0 0 .94-.3 3.1 1.15a10.7 10.7 0 0 1 5.64 0c2.15-1.46 3.1-1.15 3.1-1.15.61 1.55.22 2.7.11 2.99.72.79 1.15 1.79 1.15 3.02 0 4.32-2.63 5.27-5.13 5.55.4.35.77 1.03.77 2.09v3.1c0 .3.2.65.78.54A11.2 11.2 0 0 0 12 .8Z"/></svg>',
   linkedin: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 2.5 6 2.49 2.49 0 0 1 4.98 3.5ZM3 8.98h4v12H3v-12ZM9.5 8.98h3.83v1.64h.05a4.2 4.2 0 0 1 3.78-2.08c4.04 0 4.79 2.66 4.79 6.12v6.32h-4v-5.6c0-1.34-.03-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.96v5.7h-4v-12Z"/></svg>',
+  instagram: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">' +
+    '<rect x="2.9" y="2.9" width="18.2" height="18.2" rx="5.2"/>' +
+    '<circle cx="12" cy="12" r="4.2"/>' +
+    '<circle cx="17.4" cy="6.6" r="1.25" fill="currentColor" stroke="none"/></svg>',
   dis: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M14 4h6v6"/><path d="M20 4 10.5 13.5"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg>'
 };
 
@@ -974,6 +1013,16 @@ function cerceveCiz() {
   }).join("");
 
   document.getElementById("bolumBaslik").textContent = m.bolumBaslik;
+  document.getElementById("kulupBaslik").textContent = m.kulupBaslik;
+  document.getElementById("kulupRol").textContent = m.kulupRol;
+  document.getElementById("kulup").innerHTML =
+    '<div><h3>' + kacis(m.kulupAd) + '</h3><p>' + kacis(m.kulupNot) + '</p></div>' +
+    '<div class="baglar">' +
+      '<a class="bag" href="' + KULUP.instagram + '" target="_blank" rel="noopener noreferrer">' +
+        IKON.instagram + '<span>' + kacis(KULUP.instagramAd) + '</span></a>' +
+      '<a class="bag" href="mailto:' + KULUP.eposta + '">' +
+        IKON.posta + '<span>' + kacis(KULUP.eposta) + '</span></a>' +
+    '</div>';
   document.getElementById("sayac").textContent = m.sayac(PROJELER.length);
   document.getElementById("iletisimEtiket").textContent = m.iletisim;
   document.getElementById("imza").textContent = m.imza;

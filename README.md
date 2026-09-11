@@ -109,6 +109,28 @@ public yaparsan adresini `depo` alanına yazman yeterli, düğme kendiliğinden 
 Canlı linkler senin Vercel dağıtımlarına gidiyor. Bir tanesini herkese açık
 göstermek istemiyorsan o projenin `canli` alanını boşalt, düğme kaybolur.
 
+## Kulüp paneli
+
+Uygulama listesinin altında, kulüp için ayrı bir bölüm var: kulüp adı, tek
+cümlelik not ve iki bağlantı (Instagram, e-posta).
+
+Bilgiler script başındaki **`KULUP`** nesnesinde:
+
+```js
+var KULUP = {
+  eposta:      "iguhavacilikkulubu@gmail.com",
+  instagram:   "https://www.instagram.com/iguhavacilikkulubu/",
+  instagramAd: "@iguhavacilikkulubu"
+};
+```
+
+Panelin yazıları `METIN` içinde, iki dilde: `kulupBaslik` (bölüm başlığı),
+`kulupRol` (sağdaki küçük yazı), `kulupAd` ve `kulupNot`.
+
+Yeni bir bağlantı eklemek istersen (ör. LinkedIn sayfası, web sitesi)
+`KULUP` nesnesine alan ekleyip `cerceveCiz()` içindeki `.kulup` blokuna bir
+`<a class="bag">` daha koy.
+
 ## Arka plandaki uçaklar
 
 Sayfanın arkasında iz bırakarak uçan uçaklar var (`index.html` sonundaki
