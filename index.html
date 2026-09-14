@@ -1305,33 +1305,46 @@ temaDugme.addEventListener("click", function () {
   }
   window.gokyuzuRenkYenile = function () { if (hazir) boya(); };
 
-  /* Ekran dışında, kenarlardan birinde bir nokta (ekran kesri uzayında) */
-  function kenar() {
-    var pay = 0.14;
-    var k = Math.floor(Math.random() * 4);
-    if (k === 0) return { x: -pay, y: Math.random(), k: k };
-    if (k === 1) return { x: 1 + pay, y: Math.random(), k: k };
-    if (k === 2) return { x: Math.random(), y: -pay, k: k };
-    return { x: Math.random(), y: 1 + pay, k: k };
+  /* Rota uçları. Hedef: ekranda o an duran izlerin boy / (boy + en) kadarı
+     yatay olsun — uzun sayfada (telefon) izlerin çoğu yatay.
+
+     Ama kalkış olasılığını doğrudan bu oran yapmak yetmiyor: uçak rotasını
+     bitirince yerine yenisi geliyor ve süre rota uzunluğuyla orantılı. Uzun
+     dikey uçuş ekranda çok daha uzun kalır, izleri birikir. Süre (≈ en ya da
+     boy) hesaba katılınca kalkış olasılığı boy² / (boy² + en²) çıkıyor. */
+  function uclar() {
+    var pay = 0.14;                       // ekran dışı pay, genişliğin kesri
+    if (Math.random() < sy * sy / (sy * sy + g * g)) {
+      /* Yatay: iniş/çıkış en fazla 0,7 ekran boyu ve genişliğin %35'i —
+         dar ekranda da gerçekten yatay kalsın */
+      var ay = Math.random();
+      var inis = Math.min(y * 0.7, g * 0.35);
+      var by = Math.min(1, Math.max(0, ay + (Math.random() * 2 - 1) * inis / sy));
+      var soldan = Math.random() < 0.5;
+      return { a: { x: soldan ? -pay : 1 + pay, y: ay },
+               b: { x: soldan ? 1 + pay : -pay, y: by } };
+    }
+    var payY = pay * g / sy;              // aynı pay, piksel olarak
+    var yukaridan = Math.random() < 0.5;
+    return { a: { x: Math.random(), y: yukaridan ? -payY : 1 + payY },
+             b: { x: Math.random(), y: yukaridan ? 1 + payY : -payY } };
   }
 
   function yeniUcus() {
     var i = Math.floor(Math.random() * TURLER.length);
     var t = TURLER[i];
+    var u = uclar(), a = u.a, b = u.b;
 
-    var a = kenar(), b = kenar(), dene = 0;
-    while ((b.k === a.k || Math.hypot(b.x - a.x, b.y - a.y) < 0.8) && dene++ < 14) b = kenar();
-
-    /* Yay: orta noktadan rotaya dik sapma. Uçuşların ~%35'i belirgin yay
-       çizer, kalanı neredeyse düz gider. */
+    /* Yay: orta noktadan rotaya dik sapma, PİKSEL uzayında (uzun sayfada
+       normalize uzayda hesaplamak dev kavisler üretiyordu). Uçuşların ~%35'i
+       belirgin yay çizer, kalanı neredeyse düz gider. */
     var dx = b.x - a.x, dy = b.y - a.y;
-    var uz = Math.hypot(dx, dy) || 1;
+    var dxp = dx * g, dyp = dy * sy;
+    var pikselUz = Math.hypot(dxp, dyp) || 1;
     var sapma = (Math.random() < 0.35 ? 0.18 + Math.random() * 0.3 : Math.random() * 0.07)
-              * (Math.random() < 0.5 ? -1 : 1);
+              * (Math.random() < 0.5 ? -1 : 1) * pikselUz;
 
-    /* Hız sabit: süre rota uzunluğundan gelir. Sayfa boyunca dikey giden
-       uçak, ekranı yatay geçen uçakla aynı hızda görünür. */
-    var pikselUz = Math.hypot(dx * g, dy * sy);
+    /* Hız sabit: süre rota uzunluğundan gelir. */
     var hiz = Math.hypot(g, y) / (14 + Math.random() * 13);   // ekran köşegeni / 14-27 sn
 
     return {
@@ -1339,7 +1352,8 @@ temaDugme.addEventListener("click", function () {
       boy: (9 + Math.random() * 8) * (t.olcek || 1) * 2,
       a: a,
       b: b,
-      k: { x: (a.x + b.x) / 2 - dy / uz * sapma, y: (a.y + b.y) / 2 + dx / uz * sapma },
+      k: { x: (a.x + b.x) / 2 - dyp / pikselUz * sapma / g,
+           y: (a.y + b.y) / 2 + dxp / pikselUz * sapma / sy },
       sure: Math.max(10, pikselUz / hiz),
       gecen: -Math.random() * 4,
       vurgulu: Math.random() < 0.25
