@@ -1235,6 +1235,10 @@ temaDugme.addEventListener("click", function () {
    şekilde hizalı, dönme açısı da doğrudan hareket vektöründen geliyor.
    Rotalar düz ya da yay; kalp/gösteri formasyonları yok.
 
+   Rotalar SAYFA koordinatında: uçak sayfanın bir yerine aittir, kaydırınca
+   içerikle birlikte yukarı kayar. Tuval yine ekran boyunda (uzun sayfada
+   dev bir tuval bellek yemesin diye); çizerken kaydırma kadar ötelenir.
+
    prefers-reduced-motion açıksa hiç çalışmaz.
    ===================================================================== */
 (function () {
@@ -1254,7 +1258,7 @@ temaDugme.addEventListener("click", function () {
   document.body.insertBefore(tuval, document.body.firstChild);
   var cx = tuval.getContext("2d");
 
-  var g = 0, y = 0;
+  var g = 0, y = 0, sy = 0;   // g,y: ekran; sy: sayfanın tüm yüksekliği
   var gorseller = [], boyali = [], ucuslar = [];
   var renkUcak = "", renkIz = "", renkVurgu = "";
   var hazir = false;
@@ -1263,6 +1267,7 @@ temaDugme.addEventListener("click", function () {
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
     g = window.innerWidth;
     y = window.innerHeight;
+    sy = Math.max(document.documentElement.scrollHeight, y);
     tuval.width = Math.round(g * dpr);
     tuval.height = Math.round(y * dpr);
     cx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -1324,13 +1329,18 @@ temaDugme.addEventListener("click", function () {
     var sapma = (Math.random() < 0.35 ? 0.18 + Math.random() * 0.3 : Math.random() * 0.07)
               * (Math.random() < 0.5 ? -1 : 1);
 
+    /* Hız sabit: süre rota uzunluğundan gelir. Sayfa boyunca dikey giden
+       uçak, ekranı yatay geçen uçakla aynı hızda görünür. */
+    var pikselUz = Math.hypot(dx * g, dy * sy);
+    var hiz = Math.hypot(g, y) / (14 + Math.random() * 13);   // ekran köşegeni / 14-27 sn
+
     return {
       tur: i,
       boy: (9 + Math.random() * 8) * (t.olcek || 1) * 2,
       a: a,
       b: b,
       k: { x: (a.x + b.x) / 2 - dy / uz * sapma, y: (a.y + b.y) / 2 + dx / uz * sapma },
-      sure: 14 + Math.random() * 13,
+      sure: Math.max(10, pikselUz / hiz),
       gecen: -Math.random() * 4,
       vurgulu: Math.random() < 0.25
     };
@@ -1340,7 +1350,7 @@ temaDugme.addEventListener("click", function () {
     var s = 1 - t;
     return {
       x: (s * s * u.a.x + 2 * s * t * u.k.x + t * t * u.b.x) * g,
-      y: (s * s * u.a.y + 2 * s * t * u.k.y + t * t * u.b.y) * y
+      y: (s * s * u.a.y + 2 * s * t * u.k.y + t * t * u.b.y) * sy
     };
   }
 
@@ -1349,7 +1359,9 @@ temaDugme.addEventListener("click", function () {
     var fark = oncekiZaman ? Math.min((zaman - oncekiZaman) / 1000, 0.05) : 0;
     oncekiZaman = zaman;
 
+    cx.setTransform(tuval.width / g, 0, 0, tuval.height / y, 0, 0);
     cx.clearRect(0, 0, g, y);
+    cx.translate(0, -window.scrollY);   // sayfa koordinatından ekrana
     cx.lineWidth = 1.2;
     cx.lineCap = "round";
 
@@ -1393,18 +1405,29 @@ temaDugme.addEventListener("click", function () {
     im.src = t.src;
   });
 
+  /* Ekran başına yoğunluk sabit: sayfa kaç ekran boyuysa o kadar uçak */
+  function adetAyarla(ilk) {
+    var ekranBasina = window.innerWidth < 700 ? 3 : 6;
+    var hedef = Math.min(24, Math.round(ekranBasina * sy / y));
+    while (ucuslar.length < hedef) {
+      var u = yeniUcus();
+      if (ilk) u.gecen = Math.random() * u.sure * 0.75;   // ilk kare boş kalmasın
+      ucuslar.push(u);
+    }
+    if (ucuslar.length > hedef) ucuslar.length = hedef;
+  }
+
   function basla() {
     if (hatali) { tuval.remove(); return; }   // görsel gelmediyse hiç çizme
     hazir = true;
     olcu();
     boya();
-    var adet = window.innerWidth < 700 ? 3 : 6;
-    for (var i = 0; i < adet; i++) {
-      var u = yeniUcus();
-      u.gecen = Math.random() * u.sure * 0.75;   // ilk kare bos kalmasin
-      ucuslar.push(u);
+    adetAyarla(true);
+    window.addEventListener("resize", function () { olcu(); adetAyarla(false); });
+    /* Dil değişince ya da görseller yüklenince sayfa boyu değişir */
+    if (window.ResizeObserver) {
+      new ResizeObserver(function () { olcu(); adetAyarla(false); }).observe(document.body);
     }
-    window.addEventListener("resize", olcu);
     requestAnimationFrame(kare);
   }
 })();
