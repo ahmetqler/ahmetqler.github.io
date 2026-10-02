@@ -174,7 +174,7 @@ header{padding:64px 0 0}
 .kutuk{display:flex;flex-direction:column;gap:14px;margin-bottom:66px}
 .proje{
   display:grid;grid-template-columns:58px 1fr auto;align-items:center;gap:20px;
-  width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer;text-decoration:none;
+  width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer;
   background:var(--yuzey);border:1px solid var(--cizgi);border-left:3px solid var(--cizgi-koyu);
   padding:20px 22px;
   transition:border-left-color .18s ease, transform .18s ease, box-shadow .18s ease;
@@ -381,6 +381,17 @@ var KISI = {
 
 /* İkonlar — her proje için elle çizildi, tema rengini alır. */
 var GLIF = {
+  karne: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
+    '<path d="M8 40h32" stroke-linecap="round"/>' +
+    '<path d="M10 33 19 24l7 6 12-14" stroke-linecap="round" stroke-linejoin="round"/>' +
+    '<path d="M31 16h7v7" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+
+  filiz: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
+    '<path d="M24 40V22" stroke-linecap="round"/>' +
+    '<path d="M24 26c0-7-5-11-13-11 0 7 5 11 13 11Z" stroke-linejoin="round"/>' +
+    '<path d="M24 22c0-6 4-10 12-10 0 6-4 10-12 10Z" stroke-linejoin="round"/>' +
+    '<path d="M12 40h24" stroke-linecap="round"/></svg>',
+
   uygulama: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
     '<rect x="8" y="8" width="32" height="32" rx="8"/>' +
     '<path d="M24 32V17" stroke-linecap="round"/>' +
@@ -507,23 +518,115 @@ var METIN = {
 /* ---------- projeler ---------- */
 var PROJELER = [
   {
-    ad: "GANO",
-    glif: GLIF.uygulama,
+    ad: "NotTakip GPA",
+    glif: GLIF.karne,
     rozetTipi: "yayinda",
-    gizli: true,
-    teknoloji: [],
+    teknoloji: ["Next.js","React","TypeScript","Tailwind CSS","Capacitor (iOS)","IndexedDB (Dexie)","Prisma","PostgreSQL","Cloudflare R2","Codemagic"],
     gorseller: [],
     canli: "https://apps.apple.com/us/app/nottakip-gpa/id6810099793",
     depo: "",
     tr: {
       durum: "App Store'da",
-      ozet: "App Store'da yayında — NotTakip GPA adıyla indirilebilir.",
-      olcu: "iOS · App Store'da aç ↗"
+      ozet: "Sınav notlarından “bu dersten geçmek için finalden kaç lazım” ve “GANO'm nereye gidiyor” sorularına anında cevap veren iOS uygulaması.",
+      olcu: "172 üniversite · 10.161 bölüm · 1017 test",
+      anlati: "Notları girince her harf için kalan sınavlardan gereken puanı hesaplıyor, dönem dönem GANO'nun nereye gittiğini gösteriyor. Hesaplar öğrencinin okulunu uzatabilecek kararları etkilediği için her katman kendini doğruluyor. Mac olmadan yayınlandı: derleme ve imzalama bulutta, Codemagic üzerinde.",
+      sayilar: [
+        { ad: "Üniversite", deger: "172" },
+        { ad: "Bölüm", deger: "10.161" },
+        { ad: "Test", deger: "1017" },
+        { ad: "Mac", deger: "Yok" }
+      ],
+      ozellikler: [
+        "<b>Ne lazım? tablosu</b> — her harf için kalan sınavlardan gereken puan; ulaşılamayacak harfler “imkânsız” diye işaretleniyor.",
+        "<b>GANO akışı</b> — bugünkü gerçek GANO ve plan sonu tahmini; sınamalı (1,80) ve mezuniyet (2,00) eşikleri izleniyor.",
+        "<b>Transkriptten kurulum</b> — OBS transkriptini yapıştır ya da PDF'ini seç; geçmiş dersler ve harf notları tek seferde geliyor. PDF cihazdan hiç çıkmıyor.",
+        "<b>Yükseltme uyarısı</b> — tekrar alınan derste korunması gereken puanı söylüyor; daha kötü alırsan eski not siliniyor.",
+        "<b>Telafi sıralaması</b> — hangi derse yüklenmek GANO'yu en verimli kaldırır.",
+        "<b>Müfredat kataloğu</b> — okulunu ve bölümünü seç, hangi dersi hangi dönem alacağın hazır gelsin.",
+        "<b>Çan eğrisi</b> — bağıl değerlendirmede sınıf ortalamasından T skoruna göre harf eşikleri yeniden hesaplanıyor."
+      ],
+      guvence: "Motor, gerçek bir OBS transkriptinin ara toplamlarını birebir üretiyor. Transkript ayrıştırması her dönemin “Ağ.Kr” toplamıyla karşılaştırılıyor; tutmazsa kullanıcı uyarılıyor, sessiz yanlış okuma mümkün değil.",
+      not: "Harf tablosu şimdilik beş okulda hazır; katalogdan başka bir okul seçilince uygulama bunu açıkça söylüyor."
     },
     en: {
       durum: "On the App Store",
-      ozet: "Live on the App Store as NotTakip GPA.",
-      olcu: "iOS · open on the App Store ↗"
+      ozet: "An iOS app that answers “what do I need on the final to pass?” and “where is my GPA heading?” the moment you enter your grades.",
+      olcu: "172 universities · 10,161 programs · 1017 tests",
+      anlati: "Enter your grades and it works out, for every letter grade, the score you still need on the remaining exams, and shows where your GPA is heading term by term. Because these numbers feed decisions that can add a year to a degree, every layer checks itself. Shipped without a Mac: builds and signing run in the cloud on Codemagic.",
+      sayilar: [
+        { ad: "Universities", deger: "172" },
+        { ad: "Programs", deger: "10,161" },
+        { ad: "Tests", deger: "1017" },
+        { ad: "Mac", deger: "None" }
+      ],
+      ozellikler: [
+        "<b>What do I need?</b> — the score required on remaining exams for each letter grade; unreachable grades are marked “impossible”.",
+        "<b>GPA flow</b> — your real GPA today and the projected one at the end of the plan, tracking the probation (1.80) and graduation (2.00) thresholds.",
+        "<b>Setup from a transcript</b> — paste your transcript or pick its PDF; past courses and grades arrive in one go. The PDF never leaves the device.",
+        "<b>Retake warning</b> — tells you the score you must protect when retaking a passed course, since a worse result replaces the old grade.",
+        "<b>Recovery ranking</b> — which course lifts your GPA most for the effort.",
+        "<b>Curriculum catalog</b> — pick your school and program, and the course-by-term plan comes ready.",
+        "<b>Bell curve</b> — for relatively graded courses, letter thresholds are recomputed from the class average using T-scores."
+      ],
+      guvence: "The engine reproduces the running totals of a real transcript exactly. Transcript parsing is checked against each term's credit total; if they don't match the user is warned, so a silent misread is impossible.",
+      not: "Grade tables are ready for five schools so far; when you pick another school from the catalog, the app says so plainly."
+    }
+  },
+
+  {
+    ad: "Pâynâme",
+    glif: GLIF.filiz,
+    rozetTipi: "yakinda",
+    teknoloji: ["React","TypeScript","Vite","Capacitor (iOS)","IndexedDB (Dexie)","Supabase","Web Push","PWA","Vitest"],
+    gorseller: [
+      { src:"gorseller/py-01-harita.jpg", tr:"Çiftlik haritası", en:"The farm map" },
+      { src:"gorseller/py-02-hasat.jpg",  tr:"Hasat",            en:"Harvest" },
+      { src:"gorseller/py-03-kis.jpg",    tr:"Mevsimler — kış",  en:"Seasons — winter" },
+      { src:"gorseller/py-04-kasaba.jpg", tr:"Arkadaşlarla kasaba", en:"Town with friends" }
+    ],
+    canli: "",
+    depo: "",
+    tr: {
+      durum: "App Store'a hazırlanıyor",
+      ozet: "Alışkanlıklarını piksel bir çiftliğe dönüştüren hedef takipçisi: her gün yaptıkça tarlan yeşeriyor, hayvanların çoğalıyor, evin yükseliyor.",
+      olcu: "iOS · internetsiz çalışır · arkadaşlarla kasaba",
+      anlati: "Her hedef çiftlikte bir yer tutuyor: bir tarla, bir ağıl ya da bir ev. Yaptığın gün tek dokunuşla hasat ediyorsun; birkaç gün kaçırırsan tarla solmaya başlıyor ama geri dönmek hep mümkün. Veriler önce telefonda tutuluyor, internet gelince sunucuya gidiyor.",
+      sayilar: [
+        { ad: "Dondurma hakkı", deger: "≤ 10" },
+        { ad: "Sıfırlanma", deger: "7 gün" },
+        { ad: "Çevrimdışı", deger: "Tam" },
+        { ad: "Hesap", deger: "İsteğe bağlı" }
+      ],
+      ozellikler: [
+        "<b>Hasat</b> — hedefini yaptığın gün tek dokunuşla; çiftçin gidip işini yapıyor, yumurta, süt ve elmas kazanıyorsun.",
+        "<b>Seri ve dondurma</b> — 7 günlük seri bir dondurma hakkı veriyor; bir gün kaçırırsan hak otomatik harcanıyor, seri bozulmuyor.",
+        "<b>Köyünü süsle</b> — yüze yakın süs, ağaç ve yapı; yol döşe, çit çek, dere çiz.",
+        "<b>Mevsimler ve gece</b> — her hafta mevsim değişiyor.",
+        "<b>Arkadaşlarla kasaba</b> — dürtmeler, tepkiler ve birlikte tutulan hedefler; bildirimler Web Push ile.",
+        "<b>Hesapsız başla</b> — sonradan giriş yapınca veriler hesaba taşınıyor."
+      ],
+      guvence: "Senkron önce yerel: her değişiklik IndexedDB'ye yazılıyor, sunucu kabul ettiği her yazmaya artan bir sıra numarası veriyor. Günlerce çevrimdışı kalan bir cihazın verisi de kaçmıyor; eski bir yazma sunucuda tetikleyiciyle reddediliyor."
+    },
+    en: {
+      durum: "Preparing for the App Store",
+      ozet: "A habit tracker that turns your goals into a pixel farm: keep at it every day and your fields turn green, your animals multiply, your house grows.",
+      olcu: "iOS · works offline · a town with friends",
+      anlati: "Every goal takes a spot on the farm: a field, a pen or a house. On the days you do it, one tap harvests; miss a few and the field starts to wilt, but you can always come back. Data lives on the phone first and goes to the server when there's a connection.",
+      sayilar: [
+        { ad: "Streak freezes", deger: "≤ 10" },
+        { ad: "Reset after", deger: "7 days" },
+        { ad: "Offline", deger: "Full" },
+        { ad: "Account", deger: "Optional" }
+      ],
+      ozellikler: [
+        "<b>Harvest</b> — one tap on the day you do it; your farmer goes to work and you earn eggs, milk and diamonds.",
+        "<b>Streaks and freezes</b> — a 7-day streak earns a freeze; miss a day and it is spent automatically, so the streak survives.",
+        "<b>Decorate your village</b> — close to a hundred decorations, trees and buildings; lay roads, build fences, draw streams.",
+        "<b>Seasons and night</b> — the season changes every week.",
+        "<b>A town with friends</b> — nudges, reactions and shared goals, with notifications over Web Push.",
+        "<b>Start without an account</b> — sign in later and your data moves to it."
+      ],
+      guvence: "Sync is local-first: every change is written to IndexedDB, and the server stamps each write it accepts with an increasing sequence number. Even a device that stayed offline for days loses nothing, and a stale write is rejected by a server-side trigger."
     }
   },
 
@@ -1050,14 +1153,7 @@ function kutukCiz() {
       '</span>';
 
     var d;
-    if (p.gizli && p.canli) {
-      d = document.createElement("a");
-      d.className = "proje";
-      d.href = p.canli;
-      d.target = "_blank";
-      d.rel = "noopener noreferrer";
-      d.innerHTML = govde;
-    } else if (p.gizli) {
+    if (p.gizli) {
       d = document.createElement("div");
       d.className = "proje sessiz";
       d.innerHTML = govde;
