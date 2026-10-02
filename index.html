@@ -174,7 +174,7 @@ header{padding:64px 0 0}
 .kutuk{display:flex;flex-direction:column;gap:14px;margin-bottom:66px}
 .proje{
   display:grid;grid-template-columns:58px 1fr auto;align-items:center;gap:20px;
-  width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer;
+  width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer;text-decoration:none;
   background:var(--yuzey);border:1px solid var(--cizgi);border-left:3px solid var(--cizgi-koyu);
   padding:20px 22px;
   transition:border-left-color .18s ease, transform .18s ease, box-shadow .18s ease;
@@ -509,21 +509,21 @@ var PROJELER = [
   {
     ad: "GANO",
     glif: GLIF.uygulama,
-    rozetTipi: "yakinda",
+    rozetTipi: "yayinda",
     gizli: true,
     teknoloji: [],
     gorseller: [],
-    canli: "",
+    canli: "https://apps.apple.com/us/app/nottakip-gpa/id6810099793",
     depo: "",
     tr: {
-      durum: "Çok yakında App Store'da",
-      ozet: "Çok yakında App Store'da.",
-      olcu: "iOS · yayına hazırlanıyor"
+      durum: "App Store'da",
+      ozet: "App Store'da yayında — NotTakip GPA adıyla indirilebilir.",
+      olcu: "iOS · App Store'da aç ↗"
     },
     en: {
-      durum: "Coming soon to the App Store",
-      ozet: "Coming soon to the App Store.",
-      olcu: "iOS · preparing for release"
+      durum: "On the App Store",
+      ozet: "Live on the App Store as NotTakip GPA.",
+      olcu: "iOS · open on the App Store ↗"
     }
   },
 
@@ -1050,7 +1050,14 @@ function kutukCiz() {
       '</span>';
 
     var d;
-    if (p.gizli) {
+    if (p.gizli && p.canli) {
+      d = document.createElement("a");
+      d.className = "proje";
+      d.href = p.canli;
+      d.target = "_blank";
+      d.rel = "noopener noreferrer";
+      d.innerHTML = govde;
+    } else if (p.gizli) {
       d = document.createElement("div");
       d.className = "proje sessiz";
       d.innerHTML = govde;
