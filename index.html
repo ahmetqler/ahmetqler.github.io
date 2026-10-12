@@ -370,7 +370,9 @@ var VARSAYILAN_DIL = "en";   // ilk girişte açılacak dil
 var KULUP = {
   eposta:      "iguhavacilikkulubu@gmail.com",
   instagram:   "https://www.instagram.com/iguhavacilikkulubu/",
-  instagramAd: "@iguhavacilikkulubu"
+  instagramAd: "@iguhavacilikkulubu",
+  site:        "https://igu-havacilik-kulubu.vercel.app",
+  siteAd:      "igu-havacilik-kulubu.vercel.app"
 };
 
 var KISI = {
@@ -446,7 +448,10 @@ var GLIF = {
     '<path d="M11 5h17l9 9v29H11z" stroke-linejoin="round"/>' +
     '<path d="M28 5v9h9" stroke-linejoin="round"/>' +
     '<path d="M17 23h14M17 29h14M17 35h8" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>' +
-    '<path d="m38 27 1.6 4.4 4.4 1.6-4.4 1.6L38 39l-1.6-4.4L32 33l4.4-1.6z" fill="currentColor" stroke="none"/></svg>'
+    '<path d="m38 27 1.6 4.4 4.4 1.6-4.4 1.6L38 39l-1.6-4.4L32 33l4.4-1.6z" fill="currentColor" stroke="none"/></svg>',
+
+  ucak: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
+    '<path d="M24 6c1.7 0 2.6 1.6 2.6 4v9.5L41 28v4l-14.4-4.6V36l4.4 3.4V42L24 40l-7 2v-2.6l4.4-3.4v-8.6L7 32v-4l14.4-8.5V10c0-2.4.9-4 2.6-4Z" stroke-linejoin="round"/></svg>'
 };
 
 /* ---------- sayfa çerçevesi: başlıklar, etiketler, düğme yazıları ---------- */
@@ -466,7 +471,7 @@ var METIN = {
     kulupBaslik: "Kulüp",
     kulupRol: "Başkan",
     kulupAd: "İGÜ Havacılık Kulübü",
-    kulupNot: "Kulübün üye, görev ve yoklama takibi yukarıdaki Kulüp Takip uygulamasıyla yapılıyor.",
+    kulupNot: "Kulübün üye, görev ve yoklama takibi yukarıdaki Kulüp Takip uygulamasıyla yapılıyor; tanıtım sitesi de yukarıda.",
     sayac: function (n) { return n + " proje"; },
     detay: "Detay →",
     neYapiyor: "Neler yapıyor",
@@ -497,7 +502,7 @@ var METIN = {
     kulupBaslik: "Club",
     kulupRol: "President",
     kulupAd: "IGU Aviation Club",
-    kulupNot: "The club's members, tasks and attendance are tracked with Kulüp Takip, listed above.",
+    kulupNot: "The club's members, tasks and attendance are tracked with Kulüp Takip, and its website is listed above too.",
     sayac: function (n) { return n + " projects"; },
     detay: "Details →",
     neYapiyor: "What it does",
@@ -796,6 +801,58 @@ var PROJELER = [
         "<b>Serverless</b> — no Cloud Functions; everything runs on Firebase's free tier, with authorisation living in <code>firestore.rules</code>."
       ],
       guvence: "Platform administration cannot be granted through any client code path — it is switched on by hand in the Firebase Console, so nobody can assign themselves the role. Club admins included."
+    }
+  },
+
+  {
+    ad: "Havacılık Kulübü Sitesi",
+    glif: GLIF.ucak,
+    rozetTipi: "yayinda",
+    teknoloji: ["Next.js 16","React 19","TypeScript","Tailwind 4","Supabase","Row Level Security","html-to-image","Vercel"],
+    gorseller: [],
+    canli: "https://igu-havacilik-kulubu.vercel.app",
+    depo: "",
+    tr: {
+      durum: "Yayında",
+      ozet: "İGÜ Havacılık Kulübü'nün tanıtım sitesi. Bütün içerik bir yönetim panelinden değişiyor; tanıtım haftası için quiz, kişilik testleri ve stand ekranı da içinde.",
+      olcu: "37 soruluk quiz · 2 kişilik testi · stand TV ekranı",
+      anlati: "Kulübün sitesi her dönem değişen bir ekip, etkinlik ve sponsor listesi demek. Bunu her seferinde koda dokunarak güncellemek yerine her şeyi /admin paneline taşıdım: logo, sayaçlar, etkinlik fotoğrafları, dönem dönem ekip. Tanıtım haftasında standa gelenler telefondan quiz çözüp testleri paylaşırken, standdaki TV canlı sıralamayı gösteriyordu.",
+      sayilar: [
+        { ad: "Quiz sorusu", deger: "37" },
+        { ad: "Uçak sonucu", deger: "8" },
+        { ad: "Tablo", deger: "12" },
+        { ad: "Kod değişikliği", deger: "Yok" }
+      ],
+      ozellikler: [
+        "<b>Yönetim paneli</b> — genel bilgiler, sayaçlar, etkinlikler, ekip, şirketler, konuklar ve skorlar PIN'li bir panelden düzenleniyor; kaydedince sitede hemen görünüyor.",
+        "<b>Dönemli ekip</b> — her yönetim dönemi ayrı tutuluyor; “aktif dönem yap” ile geçiş tek tık. Eski yönetimin staj yaptığı şirketler “Eski Yönetimimiz Nerede?” bölümünde listeleniyor.",
+        "<b>Havacılık Quiz</b> — 37 soruluk havuzdan rastgele 10 soru; puan sunucuda, doğru cevap ve kalan süreye göre hesaplanıyor. Her öğrenci numarası bir kez oynuyor.",
+        "<b>Hangi Uçaksın?</b> — 7 soruluk kişilik testi; sonuç Instagram story boyutunda görsel olarak iniyor.",
+        "<b>Hangi Yönetim Üyesisin?</b> — sonuçlar paneldeki aktif ekipten, fotoğraf ve göreviyle geliyor.",
+        "<b>Stand ekranı</b> — TV için tam ekran sıralama; isimler havalimanı kalkış tabelası gibi harf harf dönüyor, köşede siteye giden QR kodu."
+      ],
+      guvence: "Puan istemciye hiç bırakılmıyor: quiz oturumu sunucuda tutuluyor ve her cevabın süresi orada ölçülüyor. Panel girişi 15 dakikada 10 hatalı denemeden sonra kilitleniyor; sayaç veritabanında, böylece sunucusuz ortamdaki tüm örnekler aynı sınırı görüyor. IP adresleri açık saklanmıyor, öğrenci numaraları sitede maskeleniyor ve skor tablosuna uygunsuz isim yazılamıyor."
+    },
+    en: {
+      durum: "Live",
+      ozet: "The website of the IGU Aviation Club. All content is edited from an admin panel, and it ships with a quiz, personality tests and a booth screen for orientation week.",
+      olcu: "37-question quiz · 2 personality tests · booth TV screen",
+      anlati: "A club website means a team, event list and sponsor list that change every term. Instead of touching code each time, I moved all of it into an /admin panel: logo, counters, event photos, the team term by term. During orientation week, visitors played the quiz and shared test results from their phones while the TV at the booth showed the live leaderboard.",
+      sayilar: [
+        { ad: "Quiz questions", deger: "37" },
+        { ad: "Plane results", deger: "8" },
+        { ad: "Tables", deger: "12" },
+        { ad: "Code edits", deger: "None" }
+      ],
+      ozellikler: [
+        "<b>Admin panel</b> — general info, counters, events, team, companies, guests and scores are edited from a PIN-protected panel and show up on the site as soon as they're saved.",
+        "<b>Team by term</b> — each committee term is stored separately; switching is one click on “make active term”. Where past committee members interned is listed in a “Where are they now?” section.",
+        "<b>Aviation Quiz</b> — 10 random questions from a pool of 37; the score is computed on the server from correct answers and time left. Each student number plays once.",
+        "<b>Which Plane Are You?</b> — a 7-question personality test; the result downloads as an Instagram story-sized image.",
+        "<b>Which Committee Member Are You?</b> — results come from the active team in the panel, with their photo and role.",
+        "<b>Booth screen</b> — a full-screen leaderboard for the TV; names flip letter by letter like an airport departure board, with a QR code to the site in the corner."
+      ],
+      guvence: "The score is never left to the client: the quiz session lives on the server and each answer is timed there. Panel sign-in locks after 10 wrong attempts in 15 minutes; the counter lives in the database, so every serverless instance sees the same limit. IP addresses are never stored in the clear, student numbers are masked on the site, and inappropriate names can't reach the leaderboard."
     }
   },
 
@@ -1121,6 +1178,8 @@ function cerceveCiz() {
   document.getElementById("kulup").innerHTML =
     '<div><h3>' + kacis(m.kulupAd) + '</h3><p>' + kacis(m.kulupNot) + '</p></div>' +
     '<div class="baglar">' +
+      '<a class="bag" href="' + KULUP.site + '" target="_blank" rel="noopener noreferrer">' +
+        IKON.dis + '<span>' + kacis(KULUP.siteAd) + '</span></a>' +
       '<a class="bag" href="' + KULUP.instagram + '" target="_blank" rel="noopener noreferrer">' +
         IKON.instagram + '<span>' + kacis(KULUP.instagramAd) + '</span></a>' +
       '<a class="bag" href="mailto:' + KULUP.eposta + '">' +
