@@ -450,6 +450,13 @@ var GLIF = {
     '<path d="M17 23h14M17 29h14M17 35h8" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>' +
     '<path d="m38 27 1.6 4.4 4.4 1.6-4.4 1.6L38 39l-1.6-4.4L32 33l4.4-1.6z" fill="currentColor" stroke="none"/></svg>',
 
+  drone: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
+    '<path d="M14 14l7 7M34 14l-7 7M14 34l7-7M34 34l-7-7" stroke-linecap="round"/>' +
+    '<rect x="19" y="19" width="10" height="10" rx="2.5"/>' +
+    '<ellipse cx="11" cy="11" rx="7" ry="2.2"/><ellipse cx="37" cy="11" rx="7" ry="2.2"/>' +
+    '<ellipse cx="11" cy="37" rx="7" ry="2.2"/><ellipse cx="37" cy="37" rx="7" ry="2.2"/>' +
+    '<circle cx="24" cy="24" r="1.6" fill="currentColor" stroke="none"/></svg>',
+
   ucak: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
     '<path d="M24 6c1.7 0 2.6 1.6 2.6 4v9.5L41 28v4l-14.4-4.6V36l4.4 3.4V42L24 40l-7 2v-2.6l4.4-3.4v-8.6L7 32v-4l14.4-8.5V10c0-2.4.9-4 2.6-4Z" stroke-linejoin="round"/></svg>'
 };
@@ -460,11 +467,11 @@ var METIN = {
     ustEtiket: "Portfolyo · 2026",
     girisOnce: "Uçak mühendisliği okuyorum, boş vaktimde ",
     girisVurgu: "insanların hayatını kolaylaştıran",
-    girisSonra: " uygulamalar yazıyorum: başkanı olduğum kulüpte üyelerin çalışma durumunu takip edip denetleyen, okullarda öğretilmeyen ICAO havacılık terminolojisini eğlenerek öğreten.",
+    girisSonra: " uygulamalar yazıyorum. İkisi App Store'da: not ortalamasının nereye gittiğini gösteren NotTakip GPA ve alışkanlıkları piksel bir çiftliğe çeviren Pâynâme. Bir yandan da konuşan, hatırlayan ve sonunda uçacak otonom bir drone'un beynini yazıyorum.",
     antet: [
       { etiket: "Bölüm",   deger: "Uçak Mühendisliği<br>İstanbul Gelişim Ü." },
       { etiket: "Görev",   deger: "Başkan<br>İGÜ Havacılık Kulübü" },
-      { etiket: "Yığın",   deger: "Next.js · TypeScript<br>Flutter · Firebase" },
+      { etiket: "Yığın",   deger: "TypeScript · Next.js<br>Swift · Python" },
       { etiket: "E-posta", deger: '<a href="mailto:ahmetqler@gmail.com">ahmetqler@gmail.com</a>' }
     ],
     bolumBaslik: "Uygulamalar",
@@ -491,11 +498,11 @@ var METIN = {
     ustEtiket: "Portfolio · 2026",
     girisOnce: "I study aeronautical engineering, and in my spare time I build apps that ",
     girisVurgu: "make people's lives easier",
-    girisSonra: ": one that tracks and reviews how members are doing in the club I lead, and one that turns ICAO aviation phraseology — which school never teaches — into a game.",
+    girisSonra: ". Two are on the App Store: NotTakip GPA, which shows where your grade average is heading, and Pâynâme, which turns habits into a pixel farm. On the side I'm building the brain of an autonomous drone that talks, remembers and will eventually fly.",
     antet: [
       { etiket: "Major", deger: "Aeronautical Eng.<br>Istanbul Gelisim Univ." },
       { etiket: "Role",  deger: "President<br>IGU Aviation Club" },
-      { etiket: "Stack", deger: "Next.js · TypeScript<br>Flutter · Firebase" },
+      { etiket: "Stack", deger: "TypeScript · Next.js<br>Swift · Python" },
       { etiket: "Email", deger: '<a href="mailto:ahmetqler@gmail.com">ahmetqler@gmail.com</a>' }
     ],
     bolumBaslik: "Apps",
@@ -581,20 +588,22 @@ var PROJELER = [
   {
     ad: "Pâynâme",
     glif: GLIF.filiz,
-    rozetTipi: "yakinda",
+    rozetTipi: "yayinda",
     teknoloji: ["React","TypeScript","Vite","Capacitor (iOS)","IndexedDB (Dexie)","Supabase","Web Push","PWA","Vitest"],
     gorseller: [
+      { src:"gorseller/py-05-koy.jpg",    tr:"Hayalindeki köy", en:"The village of your dreams" },
       { src:"gorseller/py-01-harita.jpg", tr:"Çiftlik haritası", en:"The farm map" },
       { src:"gorseller/py-02-hasat.jpg",  tr:"Hasat",            en:"Harvest" },
       { src:"gorseller/py-03-kis.jpg",    tr:"Mevsimler — kış",  en:"Seasons — winter" },
-      { src:"gorseller/py-04-kasaba.jpg", tr:"Arkadaşlarla kasaba", en:"Town with friends" }
+      { src:"gorseller/py-04-kasaba.jpg", tr:"Arkadaşlarla kasaba", en:"Town with friends" },
+      { src:"gorseller/py-06-panayir.jpg", tr:"Hayvanlar, pazar ve panayır", en:"Animals, market and fair" }
     ],
     canli: "",
     depo: "",
     tr: {
-      durum: "App Store'a hazırlanıyor",
+      durum: "App Store'da",
       ozet: "Alışkanlıklarını piksel bir çiftliğe dönüştüren hedef takipçisi: her gün yaptıkça tarlan yeşeriyor, hayvanların çoğalıyor, evin yükseliyor.",
-      olcu: "iOS · internetsiz çalışır · arkadaşlarla kasaba",
+      olcu: "iOS · ücretsiz, reklamsız · 20 kişilik kasaba",
       anlati: "Her hedef çiftlikte bir yer tutuyor: bir tarla, bir ağıl ya da bir ev. Yaptığın gün tek dokunuşla hasat ediyorsun; birkaç gün kaçırırsan tarla solmaya başlıyor ama geri dönmek hep mümkün. Veriler önce telefonda tutuluyor, internet gelince sunucuya gidiyor.",
       sayilar: [
         { ad: "Dondurma hakkı", deger: "≤ 10" },
@@ -606,16 +615,17 @@ var PROJELER = [
         "<b>Hasat</b> — hedefini yaptığın gün tek dokunuşla; çiftçin gidip işini yapıyor, yumurta, süt ve elmas kazanıyorsun.",
         "<b>Seri ve dondurma</b> — 7 günlük seri bir dondurma hakkı veriyor; bir gün kaçırırsan hak otomatik harcanıyor, seri bozulmuyor.",
         "<b>Köyünü süsle</b> — yüze yakın süs, ağaç ve yapı; yol döşe, çit çek, dere çiz.",
-        "<b>Mevsimler ve gece</b> — her hafta mevsim değişiyor.",
-        "<b>Arkadaşlarla kasaba</b> — dürtmeler, tepkiler ve birlikte tutulan hedefler; bildirimler Web Push ile.",
+        "<b>Mevsimler ve gece</b> — her hafta mevsim değişiyor: baharda kelebekler, kışın kar; gece lambalar yanıyor.",
+        "<b>Ay bileti</b> — her ay ücretsiz bir bilet; hedefleri yaptıkça basamaklar açılıyor, o aya özel süsler kazanılıyor.",
+        "<b>Arkadaşlarla kasaba</b> — 20 kişiye kadar; herkesin kendi evi ve tarlası var, her hafta birlikte hedef tutulunca pazar kuruluyor. Dürtmeler ve bildirimler Web Push ile.",
         "<b>Hesapsız başla</b> — sonradan giriş yapınca veriler hesaba taşınıyor."
       ],
       guvence: "Senkron önce yerel: her değişiklik IndexedDB'ye yazılıyor, sunucu kabul ettiği her yazmaya artan bir sıra numarası veriyor. Günlerce çevrimdışı kalan bir cihazın verisi de kaçmıyor; eski bir yazma sunucuda tetikleyiciyle reddediliyor."
     },
     en: {
-      durum: "Preparing for the App Store",
+      durum: "On the App Store",
       ozet: "A habit tracker that turns your goals into a pixel farm: keep at it every day and your fields turn green, your animals multiply, your house grows.",
-      olcu: "iOS · works offline · a town with friends",
+      olcu: "iOS · free, no ads · towns of up to 20",
       anlati: "Every goal takes a spot on the farm: a field, a pen or a house. On the days you do it, one tap harvests; miss a few and the field starts to wilt, but you can always come back. Data lives on the phone first and goes to the server when there's a connection.",
       sayilar: [
         { ad: "Streak freezes", deger: "≤ 10" },
@@ -627,11 +637,66 @@ var PROJELER = [
         "<b>Harvest</b> — one tap on the day you do it; your farmer goes to work and you earn eggs, milk and diamonds.",
         "<b>Streaks and freezes</b> — a 7-day streak earns a freeze; miss a day and it is spent automatically, so the streak survives.",
         "<b>Decorate your village</b> — close to a hundred decorations, trees and buildings; lay roads, build fences, draw streams.",
-        "<b>Seasons and night</b> — the season changes every week.",
-        "<b>A town with friends</b> — nudges, reactions and shared goals, with notifications over Web Push.",
+        "<b>Seasons and night</b> — the season changes every week: butterflies in spring, snow in winter; at night the lamps come on.",
+        "<b>Monthly pass</b> — a free pass every month; keeping your goals unlocks its steps and that month's decorations.",
+        "<b>A town with friends</b> — up to 20 people, each with their own house and field; hit a shared goal each week and the market opens. Nudges and notifications over Web Push.",
         "<b>Start without an account</b> — sign in later and your data moves to it."
       ],
       guvence: "Sync is local-first: every change is written to IndexedDB, and the server stamps each write it accepts with an increasing sequence number. Even a device that stayed offline for days loses nothing, and a stale write is rejected by a server-side trigger."
+    }
+  },
+
+  {
+    ad: "Tayklin",
+    glif: GLIF.drone,
+    rozetTipi: "gelisiyor",
+    teknoloji: ["Python 3.12","Claude API","faster-whisper","Piper","XTTS-v2","SQLite FTS5","fastembed","pytest"],
+    gorseller: [],
+    canli: "",
+    depo: "",
+    tr: {
+      durum: "Geliştirmede",
+      ozet: "Konuşan, hatırlayan ve sonunda uçacak otonom bir drone'un yapay zekâ beyni. Beyin hazır: Peo adlı karakter sesli sohbet ediyor, geçen haftayı hatırlıyor, internette araştırıyor.",
+      olcu: "233 test · 500 g altı drone hedefi · ses cihazda",
+      anlati: "Proje beyinden başlıyor, çünkü bir drone'u akıllı yapan şey pervanesi değil, ne duyduğu ve ne hatırladığı. Peo şu an bilgisayarda çalışıyor: Türkçe ve İngilizce konuşuyor, sesi cihazda yazıya çeviriyor, kendi sesiyle cevap veriyor. Mimari baştan gövdeden bağımsız kuruldu. Tekerlekli gövdeden uçan gövdeye geçerken yalnızca gövde modülü yeniden yazılıyor, beyin olduğu gibi kalıyor.",
+      sayilar: [
+        { ad: "Test", deger: "233" },
+        { ad: "Drone hedefi", deger: "< 500 g" },
+        { ad: "Uçuş süresi", deger: "~11 dk" },
+        { ad: "Token / tur", deger: "~3200" }
+      ],
+      ozellikler: [
+        "<b>Sesli sohbet</b> — ses Whisper ile yazıya, cevap Piper ya da XTTS-v2 ile sese çevriliyor; ikisi de cihazda. XTTS ekran kartında gerçek zamandan hızlı çalışıyor.",
+        "<b>Uzun süreli hafıza</b> — anılar markdown dosyalarında, arama hibrit: tarih filtresi, çok dilli embedding ve SQLite FTS5 birlikte. “Geçen hafta ne demiştim?” sorusu doğru cevaplanıyor.",
+        "<b>Sabit maliyet</b> — geçmişin tamamı modele gitmiyor; her tur ~3200 token bütçesiyle sınırlı, maliyet sayacı hafıza büyürken eğriyi izliyor.",
+        "<b>Araçlar</b> — internet araması, hafızaya yazma, arama ve silme; gövde komutları (git, dön, bak) şimdilik taklit modülde.",
+        "<b>Uçuş mimarisi</b> — uçuş kontrolcüsü STM32 üzerinde ArduPilot/PX4, beyin ona MAVLink ile bağlanan yardımcı bilgisayar. 500 g sınırının altında kalmak için özel bir CM5 taşıyıcı kart tasarlanacak.",
+        "<b>Uçuş kademeleri</b> — görev “söylenen odaya git ve dön”: önce optik akış ve ToF ile askıda kalma, sonra AprilTag ile odaya gitme, en son görsel SLAM ile haritalama."
+      ],
+      guvence: "Kamera ve ses cihazdan çıkmıyor; buluta yalnızca konuşma metni ve o tura seçilen beş anı gidiyor. Bir adım, bilerek bozulduğunda düzgün davranmadan bitmiş sayılmıyor: internet kesilince, API anahtarı bozulunca ya da ses üretilemeyince sohbet durmuyor.",
+      not: "Proje faz faz ilerliyor ve şu an Faz 1'de (ses). Gövde ve uçuş donanımı henüz yok; drone son faz."
+    },
+    en: {
+      durum: "In progress",
+      ozet: "The AI brain of an autonomous drone that talks, remembers and will eventually fly. The brain already works: a character called Peo holds voice conversations, remembers last week and researches online.",
+      olcu: "233 tests · sub-500 g drone target · voice stays on device",
+      anlati: "The project starts with the brain, because what makes a drone smart isn't its propellers but what it hears and remembers. Peo runs on a computer today: it speaks Turkish and English, transcribes speech on the device and answers in its own voice. The architecture is body-agnostic from day one. Moving from a wheeled body to a flying one means rewriting only the body module; the brain stays as it is.",
+      sayilar: [
+        { ad: "Tests", deger: "233" },
+        { ad: "Drone target", deger: "< 500 g" },
+        { ad: "Flight time", deger: "~11 min" },
+        { ad: "Tokens / turn", deger: "~3200" }
+      ],
+      ozellikler: [
+        "<b>Voice conversation</b> — speech is transcribed with Whisper and replies are spoken with Piper or XTTS-v2, both on the device. XTTS runs faster than real time on a GPU.",
+        "<b>Long-term memory</b> — memories live in markdown files, and search is hybrid: a date filter, multilingual embeddings and SQLite FTS5 together. “What did I say last week?” gets the right answer.",
+        "<b>Flat cost</b> — the full history never goes to the model; each turn is capped at a ~3200-token budget, and a cost meter tracks the curve as memory grows.",
+        "<b>Tools</b> — web search, plus writing, searching and deleting memories; body commands (go, turn, look) run against a stub for now.",
+        "<b>Flight architecture</b> — the flight controller is ArduPilot/PX4 on an STM32, and the brain is a companion computer talking to it over MAVLink. A custom CM5 carrier board will keep the drone under the 500 g limit.",
+        "<b>Flight levels</b> — the mission is “go to the room I name and come back”: first hovering with optical flow and ToF, then reaching rooms by AprilTag, finally mapping with visual SLAM."
+      ],
+      guvence: "Camera and voice never leave the device; only the conversation text and the five memories picked for that turn go to the cloud. A step isn't done until it behaves when deliberately broken: cut the internet, corrupt the API key or fail speech synthesis, and the conversation keeps going.",
+      not: "The project moves phase by phase and is in Phase 1 (voice). There is no body or flight hardware yet; the drone is the final phase."
     }
   },
 
@@ -824,7 +889,7 @@ var PROJELER = [
         { ad: "Kod değişikliği", deger: "Yok" }
       ],
       ozellikler: [
-        "<b>Yönetim paneli</b> — genel bilgiler, sayaçlar, etkinlikler, ekip, şirketler, konuklar ve skorlar PIN'li bir panelden düzenleniyor; kaydedince sitede hemen görünüyor.",
+        "<b>Yönetim paneli</b> — genel bilgiler, sayaçlar, etkinlikler, ekip, şirketler, konuklar ve skorlar PIN'li bir panelden düzenleniyor; kaydedince sitede hemen görünüyor. Etkinlikler fotoğraf galerisiyle, gezi ve söyleşi diye gruplanıyor.",
         "<b>Dönemli ekip</b> — her yönetim dönemi ayrı tutuluyor; “aktif dönem yap” ile geçiş tek tık. Eski yönetimin staj yaptığı şirketler “Eski Yönetimimiz Nerede?” bölümünde listeleniyor.",
         "<b>Havacılık Quiz</b> — 37 soruluk havuzdan rastgele 10 soru; puan sunucuda, doğru cevap ve kalan süreye göre hesaplanıyor. Her öğrenci numarası bir kez oynuyor.",
         "<b>Hangi Uçaksın?</b> — 7 soruluk kişilik testi; sonuç Instagram story boyutunda görsel olarak iniyor.",
@@ -845,7 +910,7 @@ var PROJELER = [
         { ad: "Code edits", deger: "None" }
       ],
       ozellikler: [
-        "<b>Admin panel</b> — general info, counters, events, team, companies, guests and scores are edited from a PIN-protected panel and show up on the site as soon as they're saved.",
+        "<b>Admin panel</b> — general info, counters, events, team, companies, guests and scores are edited from a PIN-protected panel and show up on the site as soon as they're saved. Events get photo galleries and are grouped into trips and talks.",
         "<b>Team by term</b> — each committee term is stored separately; switching is one click on “make active term”. Where past committee members interned is listed in a “Where are they now?” section.",
         "<b>Aviation Quiz</b> — 10 random questions from a pool of 37; the score is computed on the server from correct answers and time left. Each student number plays once.",
         "<b>Which Plane Are You?</b> — a 7-question personality test; the result downloads as an Instagram story-sized image.",
@@ -1019,54 +1084,54 @@ var PROJELER = [
   },
 
   {
-    ad: "Kulüp Evi",
+    ad: "Ekip Takip",
     glif: GLIF.ev,
     rozetTipi: "gelisiyor",
-    teknoloji: ["Next.js 16","React 19","TypeScript","Canvas 2D","IndexedDB (idb)","Tailwind 4","PWA"],
+    teknoloji: ["Swift","SwiftUI","SwiftData","SpriteKit","WidgetKit","App Intents (Siri)","Speech (tr-TR)","XcodeGen","Codemagic"],
     gorseller: [],
     canli: "",
     depo: "",
     tr: {
-      durum: "Geliştirmede",
-      ozet: "Kulübü 2D piksel bir bina olarak gösteren görev takip uygulaması. Görev verilince kişinin piksel karakteri ilgili odaya yürüyor ve orada çalışıyor.",
-      olcu: "sunucusuz · 0 sprite dosyası · çevrimdışı",
-      anlati: "Kulüp Takip'in listesi işi görüyordu ama kimse açıp bakmıyordu. Burada bina bir bakışta okunuyor: hangi oda dolu, kim nerede çalışıyor. Altında duran şey yine gerçek görev listesi — piksel ev onun görselleştirmesi.",
+      durum: "TestFlight'ta",
+      ozet: "Kulübün işini piksel bir köy olarak gösteren iPhone uygulaması. Görevi sesle veriyorsun, son tarihi bildirim ve widget hatırlatıyor; her birim köyde bir ev, her üye sokakta yürüyen bir karakter.",
+      olcu: "native iOS · Siri ile sesli görev · Mac yok",
+      anlati: "İlk sürüm tarayıcıda çalışan piksel bir binaydı. Kullandıkça asıl ihtiyacın telefonda, saniyeler içinde görev vermek olduğu anlaşıldı ve uygulama Swift ile baştan yazıldı. “Ayşe'ye sponsor sunumunu ver, cumaya kadar” demek yetiyor: kişi, iş ve tarih cümleden ayrıştırılıyor, onay kartı çıkıyor. Mac olmadan geliştiriliyor; derleme Codemagic'te, kurulum TestFlight'tan.",
       sayilar: [
+        { ad: "Swift satırı", deger: "4.600+" },
         { ad: "Sunucu", deger: "Yok" },
-        { ad: "Sprite dosyası", deger: "0" },
-        { ad: "Oyun motoru", deger: "Yok" },
-        { ad: "Veri", deger: "Cihazda" }
+        { ad: "Mac", deger: "Yok" },
+        { ad: "Sürüm", deger: "0.12" }
       ],
       ozellikler: [
-        "<b>Piksel bina</b> — odalar ve karakterler koddan çiziliyor. Sprite dosyası yok, her şey çalışma anında üretiliyor.",
-        "<b>Kendi oyun döngüsü</b> — canvas 2D üstünde, oyun motoru ya da çizim kütüphanesi kullanılmadan.",
-        "<b>Ev düzenleyici</b> — odaların yerleşimi uygulama içinden kuruluyor, kod değişikliği gerekmiyor.",
-        "<b>Otomatik bitiş</b> — süresi dolan görev bitmiş sayılıyor ama “otomatik bitti” rozetiyle ayrı görünüyor ve tek tıkla geri alınıyor. Gerçek iş, sırf süresi doldu diye bitmiş olmaz.",
-        "<b>Sunucusuz</b> — hesap, giriş ve veritabanı yok; her şey IndexedDB'de. Yedek JSON olarak dışa ve içe aktarılıyor.",
-        "<b>PWA</b> — telefona kurulabiliyor ve çevrimdışı açılıyor."
+        "<b>Sesli görev</b> — “Hey Siri, Ekip Takip görev” mikrofonu açıyor. Kural tabanlı Türkçe ayrıştırıcı hal eklerini tanıyor (“Ayşe'ye”, “Mehmede”) ama “pazarlama”yı pazar günü, “canlı”yı Can sanmıyor.",
+        "<b>Paris planlı köy</b> — birimler meydanın çevresindeki halkalara yerleşiyor, birim arttıkça dış halka açılıyor; üyeler yollarda A* ile yürüyor.",
+        "<b>Gezilebilir ev</b> — dört odalı ev; panoya dokununca birimin görevleri, üyeye dokununca kişi kartı açılıyor. Gecikmiş işi olanın başında “!” beliriyor.",
+        "<b>Widget</b> — sıradaki görev ana ekranda; ✓ için uygulamayı açmak gerekmiyor.",
+        "<b>Tekrar ve rapor</b> — “her pazartesi” gibi tekrarlayan görevler; aylık rapor kişileri ve birimleri zamanında teslim oranına göre sıralıyor.",
+        "<b>Cila</b> — kış teması, köyde kendi karakterinle gezme, görev sesleri ve JSON yedek."
       ],
-      guvence: ""
+      guvence: "Hesap ve sunucu yok; veriler SwiftData ile cihazda duruyor, widget'la App Group üzerinden paylaşılıyor. Widget'ta basılan ✓ diske yazılıyor; uygulama öne gelince yalnızca “tamamlandı” bilgisi taze bağlama aktarılıyor, böylece iki taraf birbirinin değişikliğini ezmiyor."
     },
     en: {
-      durum: "In progress",
-      ozet: "A task tracker that draws the club as a 2D pixel building. Assign a task and that person's pixel character walks to the right room and works there.",
-      olcu: "serverless · 0 sprite files · offline",
-      anlati: "The list in Kulüp Takip did the job, but nobody opened it. Here the building reads at a glance: which rooms are busy, who is working where. Underneath it is still a real task list — the pixel house is how that list is drawn.",
+      durum: "On TestFlight",
+      ozet: "An iPhone app that shows the club's work as a pixel village. You assign tasks by voice, notifications and a widget remind you of deadlines; every unit is a house in the village and every member a character walking its streets.",
+      olcu: "native iOS · voice tasks via Siri · no Mac",
+      anlati: "The first version was a pixel building running in the browser. Using it showed that the real need was assigning a task on the phone in seconds, so the app was rewritten from scratch in Swift. Saying “give Ayşe the sponsor deck, by Friday” is enough: the person, the task and the date are parsed out of the sentence and a confirmation card appears. It's built without a Mac; builds run on Codemagic and installs come through TestFlight.",
       sayilar: [
+        { ad: "Lines of Swift", deger: "4,600+" },
         { ad: "Server", deger: "None" },
-        { ad: "Sprite files", deger: "0" },
-        { ad: "Game engine", deger: "None" },
-        { ad: "Data", deger: "On device" }
+        { ad: "Mac", deger: "None" },
+        { ad: "Version", deger: "0.12" }
       ],
       ozellikler: [
-        "<b>A pixel building</b> — rooms and characters are drawn from code. There are no sprite files; everything is generated at runtime.",
-        "<b>Its own game loop</b> — written on canvas 2D, with no game engine or drawing library.",
-        "<b>A house editor</b> — the room layout is built from inside the app, with no code change needed.",
-        "<b>Automatic completion</b> — a task whose time runs out counts as done, but is marked with an “auto-finished” badge and can be undone in one click. Real work isn't finished just because the clock ran out.",
-        "<b>Serverless</b> — no accounts, no sign-in, no database; everything lives in IndexedDB. Backups export and import as JSON.",
-        "<b>PWA</b> — installs on a phone and opens offline."
+        "<b>Voice tasks</b> — “Hey Siri, Ekip Takip task” opens the microphone. A rule-based Turkish parser understands case endings (“Ayşe'ye”, “Mehmede”) without mistaking “pazarlama” (marketing) for Sunday or “canlı” for the name Can.",
+        "<b>A Paris-plan village</b> — units settle into rings around a central square, and a new outer ring opens as units are added; members walk the roads with A*.",
+        "<b>A house you can walk through</b> — four rooms; tap the board for the unit's tasks or a member for their card. Anyone with an overdue task gets a “!” over their head.",
+        "<b>Widget</b> — the next task sits on the home screen; ticking it off doesn't require opening the app.",
+        "<b>Repeats and reports</b> — recurring tasks like “every Monday”; a monthly report ranks people and units by on-time delivery.",
+        "<b>Polish</b> — a winter theme, walking the village as your own character, task sounds and JSON backups."
       ],
-      guvence: ""
+      guvence: "No accounts and no server; data lives on the device in SwiftData and is shared with the widget through an App Group. A tick on the widget is written to disk, and when the app comes to the foreground only the “completed” flag is carried into a fresh context, so neither side overwrites the other's changes."
     }
   },
 
